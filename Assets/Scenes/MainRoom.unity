@@ -547,6 +547,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 43.08, y: 380.753, z: 14.51}
+--- !u!4 &698636936 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3248073712993518582, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+  m_PrefabInstance: {fileID: 7514003156744215129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &704619980
 Mesh:
   m_ObjectHideFlags: 0
@@ -2449,6 +2454,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: playerLineOfSight
+      value: 
+      objectReference: {fileID: 698636936}
     - target: {fileID: 7919606841584617860, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.098156
