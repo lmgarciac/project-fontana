@@ -6,8 +6,10 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField]
-    private float interactRange = 2f;
-    private Collider[] colliderArray;
+    private float interactRange = 3f;
+    [SerializeField]
+    private Transform playerLineOfSight;
+    private RaycastHit[] raycastArray;
 
     private void Update()
     {
@@ -19,16 +21,20 @@ public class PlayerInteraction : MonoBehaviour
                 interactable.Interact(transform);
             }
         }
+    }
 
+    private void FixedUpdate()
+    {
+        Debug.DrawRay(playerLineOfSight.position, playerLineOfSight.forward, Color.green);
     }
 
     public IInteractable GetInteractableObject()
     {
         List<IInteractable> interactableList = new List<IInteractable>();
-        colliderArray = Physics.OverlapSphere(transform.position, interactRange); //Refactor into nonalloc
-        foreach(Collider collider in colliderArray)
+        raycastArray = Physics.RaycastAll(playerLineOfSight.position, playerLineOfSight.forward, interactRange); //Make in non alloc just in case?
+        foreach(RaycastHit objectCollision in raycastArray) //Do we need a foreach? Maybe check first collision and thats it
         {
-            if (collider.TryGetComponent(out IInteractable interactable))
+            if (objectCollision.collider.TryGetComponent(out IInteractable interactable))
             {
                 interactableList.Add(interactable);
             }
