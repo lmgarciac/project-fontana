@@ -6,11 +6,12 @@ TagManager:
   tags:
   - CinemachineTarget
   - SpawnPoint
+  - Portal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Portal
   - Water
   - UI
   - 
