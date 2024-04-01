@@ -15,10 +15,20 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            IInteractable interactable = GetInteractableObject();
-            if (interactable != null)
+            InteractableObject interactable = GetInteractableObject();
+
+            if (interactable == null) return;
+
+            if (interactable.IsPickableObject)
             {
-                interactable.Interact(transform);
+                interactable.Interact(); //Object interaction (maybe make himself instantiate)
+
+                GameObject pickedObject = Instantiate(interactable.gameObject, playerLineOfSight.GetChild(0)); //First child (inventory slot 0?)
+                pickedObject.transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                interactable.Interact();
             }
         }
     }
@@ -28,20 +38,20 @@ public class PlayerInteraction : MonoBehaviour
         Debug.DrawRay(playerLineOfSight.position, playerLineOfSight.forward, Color.green);
     }
 
-    public IInteractable GetInteractableObject()
+    public InteractableObject GetInteractableObject()
     {
-        List<IInteractable> interactableList = new List<IInteractable>();
+        List<InteractableObject> interactableList = new List<InteractableObject>();
         raycastArray = Physics.RaycastAll(playerLineOfSight.position, playerLineOfSight.forward, interactRange); //Make in non alloc just in case?
         foreach(RaycastHit objectCollision in raycastArray) //Do we need a foreach? Maybe check first collision and thats it
         {
-            if (objectCollision.collider.TryGetComponent(out IInteractable interactable))
+            if (objectCollision.collider.TryGetComponent(out InteractableObject interactable))
             {
                 interactableList.Add(interactable);
             }
         }
 
-        IInteractable closestInteractable = null;
-        foreach(IInteractable interactable in interactableList)
+        InteractableObject closestInteractable = null;
+        foreach(InteractableObject interactable in interactableList)
         {
             if(closestInteractable == null)
             {
