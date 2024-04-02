@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PortalBehavior : MonoBehaviour
+public class PortalBehaviorStencil : MonoBehaviour
 {
     [SerializeField] ParticleSystem _particleSystem;
     [SerializeField] AudioSource _audioSource;
@@ -28,13 +28,11 @@ public class PortalBehavior : MonoBehaviour
             _audioSource.Play();
             if (_transitioning && _seeThroughSphere.localScale != _seeThroughSphereSize)
             {
-                // If currently transitioning down, restart scaling up
                 StopCoroutine(_scaleCoroutine);
                 _scaleCoroutine = StartCoroutine(ScaleSphere(_seeThroughSphereSize, _transitionTime));
             }
             else if (!_transitioning)
             {
-                // If not transitioning, start scaling up
                 _scaleCoroutine = StartCoroutine(ScaleSphere(_seeThroughSphereSize, _transitionTime));
             }
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1372500401776764413}
   - component: {fileID: 5902865578987175371}
   m_Layer: 0
-  m_Name: Portal
+  m_Name: PortalStencil
   m_TagString: Portal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
