@@ -2,7 +2,10 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    void Interact(Transform interactorTransform);
+    string InteractablePrompt { get; }
+    bool IsPickableObject { get; }
+
+    void Interact();
     string GetInteractPrompt();
     Transform GetTransform();
 }
