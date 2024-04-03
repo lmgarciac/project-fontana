@@ -1,35 +1,90 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PortalTransporter : MonoBehaviour
 {
     [SerializeField] private PortalBehaviorRT _targetPortal;
 
+    [SerializeField] private float _effectIntensity = 5f;
+    [SerializeField] private float _transitionTime = 2f;
+    [SerializeField] private float _waitTime = 2f;
+
+
+    private ChromaticAberration effect;
+    private float initialIntensity;
+    private PostProcessVolume _mainVolume;
+
+    private void Awake()
+    {
+        _mainVolume = Camera.main.gameObject.GetComponent<PostProcessVolume>();
+    }
+
+    private void Start()
+    {
+        _mainVolume.profile.TryGetSettings(out effect);
+
+        if (effect != null)
+        {
+            initialIntensity = effect.intensity;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Transform cameraTransform = _targetPortal.GetCamera().transform;
-            Debug.LogError($"Player Enter! {cameraTransform.gameObject.name} {cameraTransform.gameObject.transform.position}");
+            StartCoroutine(TransportToDestination(other));
+        }
+    }
 
-            CharacterController playerController = other.gameObject.GetComponent<CharacterController>();
-            if (playerController != null)
-            {
-                // Move the player using CharacterController's Move method
-                playerController.enabled = false; // Disable the controller temporarily to avoid interference
-                other.gameObject.transform.position = cameraTransform.position;
-                //other.gameObject.transform.rotation = cameraTransform.rotation;
-                other.gameObject.transform.rotation = Quaternion.Euler(0f, cameraTransform.rotation.eulerAngles.y, 0f);
+    private IEnumerator TransportToDestination(Collider other)
+    {
+        Transform cameraTransform = _targetPortal.GetCamera().transform;
 
-                playerController.enabled = true; // Re-enable the controller
+        CharacterController playerController = other.gameObject.GetComponent<CharacterController>();
+        if (playerController != null)
+        {
+            playerController.enabled = false;
 
-                _targetPortal.ExitPortalZone(other);
-            }
-            else
-            {
-                Debug.LogError("Player object does not have a CharacterController component attached.");
-            }
+            yield return StartCoroutine(TransitionEffect());
+
+            other.gameObject.transform.position = cameraTransform.position + cameraTransform.forward;
+            other.gameObject.transform.rotation = Quaternion.Euler(0f, cameraTransform.rotation.eulerAngles.y, 0f);
+
+            effect.intensity.value = initialIntensity;
+            playerController.enabled = true;
+
+            _targetPortal.ExitPortalZone(other);
+        }
+    }
+
+    private IEnumerator TransitionEffect()
+    {
+        if (effect == null)
+            yield break;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < _transitionTime)
+        {
+            effect.intensity.value = Mathf.Lerp(initialIntensity, _effectIntensity, elapsedTime / _transitionTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(_waitTime);
+
+        elapsedTime = 0f;
+
+        while (elapsedTime < _transitionTime)
+        {
+            effect.intensity.value = Mathf.Lerp(_effectIntensity, 0f, elapsedTime / _transitionTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
     }
 }
