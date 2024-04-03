@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2512124}
   - component: {fileID: 2512126}
-  - component: {fileID: 2512125}
   m_Layer: 0
   m_Name: PortalCamera
   m_TagString: Untagged
@@ -156,14 +155,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5119652156874820132}
   m_LocalEulerAnglesHint: {x: 0, y: -90.96, z: 0}
---- !u!81 &2512125
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2512123}
-  m_Enabled: 1
 --- !u!20 &2512126
 Camera:
   m_ObjectHideFlags: 0
@@ -375,18 +366,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 829802800}
-    - target: {fileID: 8061373757640257035, guid: 63f72575fbeb069498f3bd3d3edd113f, type: 3}
-      propertyPath: m_SelectedEdges.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8061373757640257035, guid: 63f72575fbeb069498f3bd3d3edd113f, type: 3}
-      propertyPath: m_SelectedFaces.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8061373757640257035, guid: 63f72575fbeb069498f3bd3d3edd113f, type: 3}
-      propertyPath: m_SelectedVertices.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8890608414077633405, guid: 63f72575fbeb069498f3bd3d3edd113f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5800,7 +5779,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4447191149437563762}
   - component: {fileID: 2463027133093392178}
-  - component: {fileID: 5081015207758324644}
   - component: {fileID: 1592348696845916598}
   m_Layer: 0
   m_Name: StudioDestinationCamera
@@ -7181,7 +7159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2880855223976862791}
   - component: {fileID: 4063140188768614407}
-  - component: {fileID: 6687324488197895313}
   - component: {fileID: 888452596229607043}
   m_Layer: 0
   m_Name: TheRoomDestinationCamera
@@ -36182,14 +36159,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!81 &5081015207758324644
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762739510640426079}
-  m_Enabled: 1
 --- !u!4 &5119652156874820132
 Transform:
   m_ObjectHideFlags: 0
@@ -56598,14 +56567,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!81 &6687324488197895313
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4330908867982273386}
-  m_Enabled: 1
 --- !u!23 &6704094963524679369
 MeshRenderer:
   m_ObjectHideFlags: 0
