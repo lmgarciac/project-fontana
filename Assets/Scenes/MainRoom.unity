@@ -712,6 +712,20 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &736876086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8509199583331274174, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+  m_PrefabInstance: {fileID: 7514003156744215129}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &736876092
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736876086}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: c82a334cf5a5e47978749c210cee72a7, type: 2}
 --- !u!850595691 &910678662
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -2585,10 +2599,17 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8509199583331274172, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8509199583331274174, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 736876092}
   m_SourcePrefab: {fileID: 100100000, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
 --- !u!4 &7514003156744215130 stripped
 Transform:
