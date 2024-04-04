@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private Transform playerLineOfSight;
     private RaycastHit[] raycastArray;
+    private GameObject objectInHand;
 
     private void Update()
     {
@@ -19,16 +20,21 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable == null) return;
 
-            if (interactable.IsPickableObject)
+            if (interactable.IsPickableObject) //Add interactable to hand 
             {
-                interactable.Interact(); //Object interaction (maybe make himself instantiate)
+                objectInHand = Instantiate(interactable.gameObject, playerLineOfSight.GetChild(0)); //(inventory slot 0?)
+                objectInHand.transform.localPosition = Vector3.zero;
 
-                GameObject pickedObject = Instantiate(interactable.gameObject, playerLineOfSight.GetChild(0)); //First child (inventory slot 0?)
-                pickedObject.transform.localPosition = Vector3.zero;
+                interactable.Interact(objectInHand); //Object interaction
+            }
+            else if (interactable.IsContainerObject)
+            {
+                interactable.Interact(objectInHand);
+                Destroy(objectInHand);
             }
             else
             {
-                interactable.Interact();
+                interactable.Interact(objectInHand); //Sending object in hand could be useful 
             }
         }
     }

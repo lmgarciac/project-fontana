@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5484233414080772599}
   - component: {fileID: 7781972157529869629}
   - component: {fileID: 6042245325335553969}
-  - component: {fileID: 8854868180402095688}
+  - component: {fileID: 4638294501842257812}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8164388750953057965, guid: dd2f83b5b0b6ab744b92ee764bebd93d, type: 3}
---- !u!114 &8854868180402095688
+--- !u!114 &4638294501842257812
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
