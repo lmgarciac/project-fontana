@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour, IInteractable
+public class InteractablePickable : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private string interactablePrompt;
@@ -20,7 +20,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     {
         interactableGameObject = this.gameObject;
         isContainerObject = false;
-        isPickableObject = false;
+        isPickableObject = true;
     }
 
     public string GetInteractPrompt()
@@ -35,6 +35,9 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     public void Interact(GameObject interactorObject)
     {
-        Debug.Log("INTERACTING WITH INTERACTIVE OBJECT: " + interactablePrompt);
+        Debug.Log("INTERACTING WITH PICKABLE OBJECT: " + interactablePrompt);
+
+        Debug.Log("DESTROYING PICKABLE GAMEOBJECT - PICKED UP");
+        Destroy(this.gameObject);
     }
 }

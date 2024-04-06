@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour, IInteractable
+public class InteractableContainer : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private string interactablePrompt;
@@ -19,7 +19,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     private void Start()
     {
         interactableGameObject = this.gameObject;
-        isContainerObject = false;
+        isContainerObject = true;
         isPickableObject = false;
     }
 
@@ -35,6 +35,17 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     public void Interact(GameObject interactorObject)
     {
-        Debug.Log("INTERACTING WITH INTERACTIVE OBJECT: " + interactablePrompt);
+        Debug.Log("INTERACTING WITH CONTAINER OBJECT: " + interactablePrompt);
+
+        if (interactorObject == null)
+        {
+            Debug.Log("EMPTY HAND, CANT PLACE");
+        }
+        else
+        {
+            Debug.Log("PLACING OBJECT IN HAND: " + interactorObject.name);
+            GameObject placedObject = Instantiate(interactorObject, transform);
+            placedObject.transform.localPosition = Vector3.zero;
+        }
     }
 }

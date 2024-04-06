@@ -16,13 +16,13 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            InteractableObject interactable = GetInteractableObject();
+            IInteractable interactable = GetInteractableObject();
 
             if (interactable == null) return;
 
             if (interactable.IsPickableObject) //Add interactable to hand 
             {
-                objectInHand = Instantiate(interactable.gameObject, playerLineOfSight.GetChild(0)); //(inventory slot 0?)
+                objectInHand = Instantiate(interactable.InteractableGameObject, playerLineOfSight.GetChild(0)); //(inventory slot 0?)
                 objectInHand.transform.localPosition = Vector3.zero;
 
                 interactable.Interact(objectInHand); //Object interaction
@@ -44,20 +44,20 @@ public class PlayerInteraction : MonoBehaviour
         Debug.DrawRay(playerLineOfSight.position, playerLineOfSight.forward, Color.green);
     }
 
-    public InteractableObject GetInteractableObject()
+    public IInteractable GetInteractableObject()
     {
-        List<InteractableObject> interactableList = new List<InteractableObject>();
+        List<IInteractable> interactableList = new List<IInteractable>();
         raycastArray = Physics.RaycastAll(playerLineOfSight.position, playerLineOfSight.forward, interactRange); //Make in non alloc just in case?
         foreach(RaycastHit objectCollision in raycastArray) //Do we need a foreach? Maybe check first collision and thats it
         {
-            if (objectCollision.collider.TryGetComponent(out InteractableObject interactable))
+            if (objectCollision.collider.TryGetComponent(out IInteractable interactable))
             {
                 interactableList.Add(interactable);
             }
         }
 
-        InteractableObject closestInteractable = null;
-        foreach(InteractableObject interactable in interactableList)
+        IInteractable closestInteractable = null;
+        foreach(IInteractable interactable in interactableList)
         {
             if(closestInteractable == null)
             {
