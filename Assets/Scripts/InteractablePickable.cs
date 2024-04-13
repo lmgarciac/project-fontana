@@ -37,7 +37,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     {
         Debug.Log("INTERACTING WITH PICKABLE OBJECT: " + interactablePrompt);
 
-        Debug.Log("DESTROYING PICKABLE GAMEOBJECT - PICKED UP");
-        Destroy(this.gameObject);
+        //Debug.Log("DESTROYING PICKABLE GAMEOBJECT - PICKED UP");
+        //Destroy(this.gameObject);
     }
 }

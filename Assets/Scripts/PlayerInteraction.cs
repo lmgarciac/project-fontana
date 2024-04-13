@@ -9,8 +9,11 @@ public class PlayerInteraction : MonoBehaviour
     private float interactRange = 3f;
     [SerializeField]
     private Transform playerLineOfSight;
+    [SerializeField]
+    private Transform playerContainer;
     private RaycastHit[] raycastArray;
     private GameObject objectInHand;
+
 
     private void Update()
     {
@@ -22,19 +25,23 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable.IsPickableObject) //Add interactable to hand 
             {
-                objectInHand = Instantiate(interactable.InteractableGameObject, playerLineOfSight.GetChild(0)); //(inventory slot 0?)
-                objectInHand.transform.localPosition = Vector3.zero;
+                //objectInHand = Instantiate(interactable.InteractableGameObject, playerLineOfSight.GetChild(0)); //(inventory slot 0?)
+                interactable.InteractableGameObject.transform.parent = playerContainer;
+                interactable.InteractableGameObject.transform.localPosition = Vector3.zero;
+                interactable.InteractableGameObject.transform.localRotation = Quaternion.identity;
+                
+                interactable.Interact(interactable.InteractableGameObject); //Object interaction
 
-                interactable.Interact(objectInHand); //Object interaction
+                objectInHand = interactable.InteractableGameObject;
             }
             else if (interactable.IsContainerObject)
             {
                 interactable.Interact(objectInHand);
-                Destroy(objectInHand);
+                objectInHand = null;
             }
             else
             {
-                interactable.Interact(objectInHand); //Sending object in hand could be useful 
+                interactable.Interact(interactable.InteractableGameObject); //Sending object in hand could be useful 
             }
         }
     }
@@ -48,7 +55,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         List<IInteractable> interactableList = new List<IInteractable>();
         raycastArray = Physics.RaycastAll(playerLineOfSight.position, playerLineOfSight.forward, interactRange); //Make in non alloc just in case?
-        foreach(RaycastHit objectCollision in raycastArray) //Do we need a foreach? Maybe check first collision and thats it
+        foreach (RaycastHit objectCollision in raycastArray) //Do we need a foreach? Maybe check first collision and thats it
         {
             if (objectCollision.collider.TryGetComponent(out IInteractable interactable))
             {
@@ -57,15 +64,15 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         IInteractable closestInteractable = null;
-        foreach(IInteractable interactable in interactableList)
+        foreach (IInteractable interactable in interactableList)
         {
-            if(closestInteractable == null)
+            if (closestInteractable == null)
             {
                 closestInteractable = interactable;
             }
             else
             {
-                if(Vector3.Distance(transform.position, interactable.GetTransform().position) < Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
+                if (Vector3.Distance(transform.position, interactable.GetTransform().position) < Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
                 {
                     closestInteractable = interactable;
                 }

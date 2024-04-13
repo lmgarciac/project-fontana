@@ -44,8 +44,11 @@ public class InteractableContainer : MonoBehaviour, IInteractable
         else
         {
             Debug.Log("PLACING OBJECT IN HAND: " + interactorObject.name);
-            GameObject placedObject = Instantiate(interactorObject, transform);
-            placedObject.transform.localPosition = Vector3.zero;
+
+            //GameObject placedObject = Instantiate(interactorObject, transform);
+            interactorObject.transform.parent = transform;
+            interactorObject.transform.localPosition = Vector3.zero;
+            interactorObject.transform.localRotation = Quaternion.identity;
         }
     }
 }
