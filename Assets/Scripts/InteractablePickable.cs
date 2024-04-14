@@ -10,11 +10,13 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     private bool isContainerObject;
 
     private GameObject interactableGameObject;
+    private GameObject containedGameObject;
 
     public GameObject InteractableGameObject { get => interactableGameObject; }
     public string InteractablePrompt { get => interactablePrompt;}
     public bool IsPickableObject { get => isPickableObject;}
     public bool IsContainerObject { get => isContainerObject; }
+    public GameObject ContainedGameObject { get => containedGameObject; }
 
     private void Start()
     {
@@ -23,7 +25,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
         isPickableObject = true;
     }
 
-    public string GetInteractPrompt()
+    public string GetInteractPrompt(string objectInHand)
     {
         return interactablePrompt;
     }
@@ -33,11 +35,34 @@ public class InteractablePickable : MonoBehaviour, IInteractable
         return transform;
     }
 
-    public void Interact(GameObject interactorObject)
+    public GameObject PickUp(Transform playerHand)
     {
-        Debug.Log("INTERACTING WITH PICKABLE OBJECT: " + interactablePrompt);
+        Debug.Log($"PickUp {interactableGameObject.name}");
 
-        //Debug.Log("DESTROYING PICKABLE GAMEOBJECT - PICKED UP");
-        //Destroy(this.gameObject);
+        transform.parent = playerHand;
+        transform.localPosition = Vector3.zero;
+        transform.localRotation = Quaternion.identity;
+        containedGameObject = null;
+
+        return interactableGameObject;
+    }
+    public bool IsInteractionPossible(bool objectInHand)
+    {
+        return true;
+    }
+
+    public void PlaceInside(GameObject objectToPlace)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public GameObject Replace(GameObject objectToPlace, Transform playerHand)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Interact()
+    {
+        throw new System.NotImplementedException();
     }
 }

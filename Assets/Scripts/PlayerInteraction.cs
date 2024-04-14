@@ -10,10 +10,13 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private Transform playerLineOfSight;
     [SerializeField]
-    private Transform playerContainer;
+    private Transform playerHand;
+    [SerializeField]
+    private LayerMask interactableLayer;
     private RaycastHit[] raycastArray;
     private GameObject objectInHand;
 
+    public GameObject ObjectInHand { get => objectInHand;}
 
     private void Update()
     {
@@ -23,25 +26,21 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable == null) return;
 
-            if (interactable.IsPickableObject) //Add interactable to hand 
+            if (interactable.IsPickableObject && objectInHand == null)
             {
-                //objectInHand = Instantiate(interactable.InteractableGameObject, playerLineOfSight.GetChild(0)); //(inventory slot 0?)
-                interactable.InteractableGameObject.transform.parent = playerContainer;
-                interactable.InteractableGameObject.transform.localPosition = Vector3.zero;
-                interactable.InteractableGameObject.transform.localRotation = Quaternion.identity;
-                
-                interactable.Interact(interactable.InteractableGameObject); //Object interaction
-
-                objectInHand = interactable.InteractableGameObject;
+                objectInHand = interactable.PickUp(playerHand);
             }
             else if (interactable.IsContainerObject)
             {
-                interactable.Interact(objectInHand);
-                objectInHand = null;
-            }
-            else
-            {
-                interactable.Interact(interactable.InteractableGameObject); //Sending object in hand could be useful 
+                if (objectInHand != null && interactable.ContainedGameObject == null)
+                {
+                    interactable.PlaceInside(objectInHand);
+                    objectInHand = null;
+                }
+                else if (objectInHand == null && interactable.ContainedGameObject != null)
+                    objectInHand = interactable.PickUp(playerHand);
+                else if (objectInHand != null && interactable.ContainedGameObject != null)
+                    objectInHand = interactable.Replace(objectInHand, playerHand);
             }
         }
     }
@@ -54,31 +53,51 @@ public class PlayerInteraction : MonoBehaviour
     public IInteractable GetInteractableObject()
     {
         List<IInteractable> interactableList = new List<IInteractable>();
-        raycastArray = Physics.RaycastAll(playerLineOfSight.position, playerLineOfSight.forward, interactRange); //Make in non alloc just in case?
+        raycastArray = Physics.RaycastAll(playerLineOfSight.position, playerLineOfSight.forward, interactRange, interactableLayer); //Make in non alloc just in case?
+
+        IInteractable closestInteractable = null;
+        Vector3 closestImpactPoint = Vector3.zero;
+
         foreach (RaycastHit objectCollision in raycastArray) //Do we need a foreach? Maybe check first collision and thats it
         {
+
             if (objectCollision.collider.TryGetComponent(out IInteractable interactable))
             {
                 interactableList.Add(interactable);
-            }
-        }
 
-        IInteractable closestInteractable = null;
-        foreach (IInteractable interactable in interactableList)
-        {
-            if (closestInteractable == null)
-            {
-                closestInteractable = interactable;
-            }
-            else
-            {
-                if (Vector3.Distance(transform.position, interactable.GetTransform().position) < Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
+                if (closestInteractable == null)
+                {
+                    closestInteractable = interactable;
+                    closestImpactPoint = objectCollision.point;
+                }
+
+                //Debug.LogError($"Colliding with {interactable.InteractableGameObject.name} distance: {Vector3.Distance(playerLineOfSight.position, objectCollision.point)}");
+                //Debug.LogError($"Closest is {closestInteractable.InteractableGameObject.name} distance: {Vector3.Distance(playerLineOfSight.position, closestImpactPoint)}");
+
+                if (Vector3.Distance(playerLineOfSight.position, objectCollision.point) < Vector3.Distance(playerLineOfSight.position, closestImpactPoint))
                 {
                     closestInteractable = interactable;
                 }
             }
         }
 
+        //IInteractable closestInteractable = null;
+        //foreach (IInteractable interactable in interactableList)
+        //{
+        //    if (closestInteractable == null)
+        //    {
+        //        closestInteractable = interactable;
+        //    }
+        //    else
+        //    {
+        //        if (Vector3.Distance(transform.position, interactable.GetTransform().position) < Vector3.Distance(transform.position, closestInteractable.GetTransform().position))
+        //        {
+        //            closestInteractable = interactable;
+        //        }
+        //    }
+        //}
+
         return closestInteractable;
     }
+
 }

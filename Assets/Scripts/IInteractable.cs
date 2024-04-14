@@ -6,8 +6,14 @@ public interface IInteractable
     bool IsPickableObject { get; }
     bool IsContainerObject { get; }
     GameObject InteractableGameObject { get; }
+    GameObject ContainedGameObject { get; }
 
-    void Interact(GameObject interactorObject);
-    string GetInteractPrompt();
+    void Interact();
+    GameObject PickUp(Transform playerHand);
+    void PlaceInside(GameObject objectToPlace);
+    GameObject Replace(GameObject objectToPlace, Transform playerHand);
+
+    string GetInteractPrompt(string objectInHand = null);
     Transform GetTransform();
+    bool IsInteractionPossible(bool objectInHand);
 }

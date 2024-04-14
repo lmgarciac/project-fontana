@@ -10,11 +10,13 @@ public class InteractableObject : MonoBehaviour, IInteractable
     private bool isContainerObject;
 
     private GameObject interactableGameObject;
+    private GameObject containedGameObject;
 
     public GameObject InteractableGameObject { get => interactableGameObject; }
     public string InteractablePrompt { get => interactablePrompt;}
     public bool IsPickableObject { get => isPickableObject;}
     public bool IsContainerObject { get => isContainerObject; }
+    public GameObject ContainedGameObject { get => containedGameObject; }
 
     private void Start()
     {
@@ -23,7 +25,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
         isPickableObject = false;
     }
 
-    public string GetInteractPrompt()
+    public string GetInteractPrompt(string objectInHand)
     {
         return interactablePrompt;
     }
@@ -36,5 +38,30 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public void Interact(GameObject interactorObject)
     {
         Debug.Log("INTERACTING WITH INTERACTIVE OBJECT: " + interactablePrompt);
+    }
+
+    public void Interact()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public GameObject PickUp(Transform playerHand)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void PlaceInside(GameObject objectToPlace)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public GameObject Replace(GameObject objectToPlace, Transform playerHand)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public bool IsInteractionPossible(bool objectInHand)
+    {
+        throw new System.NotImplementedException();
     }
 }

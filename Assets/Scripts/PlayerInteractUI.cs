@@ -22,8 +22,13 @@ public class PlayerInteractUI : MonoBehaviour
 
     private void ShowUI(IInteractable interactable)
     {
+        GameObject objectInHand = playerInteraction.ObjectInHand;
+
+        if (!interactable.IsInteractionPossible(objectInHand != null))
+            return;
+
         containerGameObject.SetActive(true);
-        interactableObjectPrompt.text = interactable.GetInteractPrompt();
+        interactableObjectPrompt.text = interactable.GetInteractPrompt(objectInHand?.name);
     }
 
     private void HideUI()
