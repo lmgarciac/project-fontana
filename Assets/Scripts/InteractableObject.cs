@@ -39,6 +39,10 @@ public class InteractableObject : MonoBehaviour, IInteractable
     {
         Debug.Log("INTERACTING WITH INTERACTIVE OBJECT: " + interactablePrompt);
     }
+    public bool IsInteractionPossible(bool objectInHand)
+    {
+        return true;
+    }
 
     public void Interact()
     {
@@ -56,11 +60,6 @@ public class InteractableObject : MonoBehaviour, IInteractable
     }
 
     public GameObject Replace(GameObject objectToPlace, Transform playerHand)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public bool IsInteractionPossible(bool objectInHand)
     {
         throw new System.NotImplementedException();
     }
