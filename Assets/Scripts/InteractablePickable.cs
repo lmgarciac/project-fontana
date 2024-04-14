@@ -18,7 +18,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     public bool IsContainerObject { get => isContainerObject; }
     public GameObject ContainedGameObject { get => containedGameObject; }
 
-    private void Start()
+    protected virtual void Start()
     {
         interactableGameObject = this.gameObject;
         isContainerObject = false;

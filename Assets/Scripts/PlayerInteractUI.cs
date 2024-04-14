@@ -23,8 +23,10 @@ public class PlayerInteractUI : MonoBehaviour
     private void ShowUI(IInteractable interactable)
     {
         GameObject objectInHand = playerInteraction.ObjectInHand;
+        IUsable usableObject = null;
+        objectInHand?.TryGetComponent<IUsable>(out usableObject);
 
-        if (!interactable.IsInteractionPossible(objectInHand != null))
+        if (!interactable.IsInteractionPossible(objectInHand != null) || (usableObject != null && usableObject.IsBeingUsed()))
             return;
 
         containerGameObject.SetActive(true);

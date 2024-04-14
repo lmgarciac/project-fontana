@@ -12,9 +12,13 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private Transform playerHand;
     [SerializeField]
+    private Transform playerEyes;
+    [SerializeField]
     private LayerMask interactableLayer;
+
     private RaycastHit[] raycastArray;
     private GameObject objectInHand;
+    private IUsable usableObject;
 
     public GameObject ObjectInHand { get => objectInHand;}
 
@@ -23,8 +27,14 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             IInteractable interactable = GetInteractableObject();
+            objectInHand?.TryGetComponent<IUsable>(out usableObject);
 
-            if (interactable == null) return;
+            if (interactable == null || (usableObject != null && usableObject.IsBeingUsed()))
+            {
+                if (!usableObject.IsBeingUsed()) usableObject.Use(playerEyes);
+                else usableObject.Unuse(playerHand);
+                return;
+            }
 
             if (interactable.IsPickableObject && objectInHand == null)
             {
