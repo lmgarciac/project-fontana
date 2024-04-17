@@ -25,12 +25,14 @@ public class PortalTransporter : MonoBehaviour
 
     private void Start()
     {
-        _mainVolume.profile.TryGetSettings(out effect);
+        //if (_mainVolume == null) { return; }
 
-        if (effect != null)
-        {
-            initialIntensity = effect.intensity;
-        }
+        //_mainVolume.profile.TryGetSettings(out effect);
+
+        //if (effect != null)
+        //{
+        //    initialIntensity = effect.intensity;
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -50,16 +52,18 @@ public class PortalTransporter : MonoBehaviour
         {
             playerController.enabled = false;
 
-            yield return StartCoroutine(TransitionEffect());
+            //yield return StartCoroutine(TransitionEffect());
 
             other.gameObject.transform.position = cameraTransform.position + cameraTransform.forward;
             other.gameObject.transform.rotation = Quaternion.Euler(0f, cameraTransform.rotation.eulerAngles.y, 0f);
 
-            effect.intensity.value = initialIntensity;
+            //effect.intensity.value = initialIntensity;
             playerController.enabled = true;
 
             _targetPortal.ExitPortalZone(other);
         }
+
+        yield break;
     }
 
     private IEnumerator TransitionEffect()
