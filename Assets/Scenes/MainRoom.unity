@@ -547,6 +547,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 43.08, y: 380.753, z: 14.51}
+--- !u!4 &678231832 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1388403346363664119, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+  m_PrefabInstance: {fileID: 7514003156744215129}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &736876086 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8509199583331274174, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
@@ -579,8 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactablePrompt: Pick Up Hammer
-  isPickableObject: 1
-  isContainerObject: 0
+  hasAlternativeMesh: 0
 --- !u!850595691 &910678662
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1082,6 +1086,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1545005050}
+    - target: {fileID: 2283785965374082290, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398192767127512231, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3511365056041592145, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1093,6 +1105,10 @@ PrefabInstance:
     - target: {fileID: 3756332916623169741, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Name
       value: MainRoomBeta
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170480940428038835, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4461568923571606785, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
@@ -1142,6 +1158,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6106189619995656422, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502461166526759611, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7617521002467943254, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1150,10 +1174,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 158279499}
+    - target: {fileID: 7971160408964811394, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8213509447164666904, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1480657958}
+    - target: {fileID: 8335301126325469726, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8454365517943272017, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1232,8 +1264,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactablePrompt: Place Hammer
-  isPickableObject: 0
-  isContainerObject: 1
 --- !u!1001 &1847483335484654524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1388,6 +1418,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: playerEyes
+      value: 
+      objectReference: {fileID: 7514003156744215130}
+    - target: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: playerHand
+      value: 
+      objectReference: {fileID: 678231832}
+    - target: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
       propertyPath: toInstantiate
       value: 
       objectReference: {fileID: 8142475151190256872, guid: 65eb62a40e6687843834b85485f62d9a, type: 3}
@@ -1395,6 +1433,10 @@ PrefabInstance:
       propertyPath: playerLineOfSight
       value: 
       objectReference: {fileID: 7514003156744215130}
+    - target: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 7919606841584617860, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.098156
