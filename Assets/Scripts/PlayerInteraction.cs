@@ -39,6 +39,7 @@ public class PlayerInteraction : MonoBehaviour
             if (interactable.IsPickableObject && objectInHand == null)
             {
                 objectInHand = interactable.PickUp(playerHand);
+                return;
             }
             else if (interactable.IsContainerObject)
             {
@@ -51,7 +52,10 @@ public class PlayerInteraction : MonoBehaviour
                     objectInHand = interactable.PickUp(playerHand);
                 else if (objectInHand != null && interactable.ContainedGameObject != null)
                     objectInHand = interactable.Replace(objectInHand, playerHand);
+                return;
             }
+
+            interactable.Interact(); //This is for interactables that are not pickable or containers
         }
     }
 

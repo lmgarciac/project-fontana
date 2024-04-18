@@ -54,6 +54,9 @@ public class InteractableContainer : MonoBehaviour, IInteractable
 
         returnContained.GetComponent<Collider>().enabled = true;
 
+        //This is needed for using changing the object mesh while picking it up/placing it down
+        ChangeObjectMesh(returnContained.GetComponent<InteractablePickable>(), true);
+
         return returnContained;
     }
 
@@ -65,6 +68,9 @@ public class InteractableContainer : MonoBehaviour, IInteractable
         objectToPlace.transform.parent = transform;
         objectToPlace.transform.localPosition = Vector3.zero;
         objectToPlace.transform.localRotation = Quaternion.identity;
+
+        //This is needed for using changing the object mesh while picking it up/placing it down
+        ChangeObjectMesh(objectToPlace.GetComponent<InteractablePickable>(), false);
 
         containedGameObject = objectToPlace;
     }
@@ -80,6 +86,12 @@ public class InteractableContainer : MonoBehaviour, IInteractable
         objectToPlace.transform.localPosition = Vector3.zero;
         objectToPlace.transform.localRotation = Quaternion.identity;
 
+        if (objectToPlace.GetComponent<InteractablePickable>().HasAlternativeMesh)
+        {
+            objectToPlace.transform.GetChild(0).gameObject.SetActive(true);
+            objectToPlace.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
         containedGameObject.transform.parent = playerHand;
         containedGameObject.transform.localPosition = Vector3.zero;
         containedGameObject.transform.localRotation = Quaternion.identity;
@@ -94,6 +106,15 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     public bool IsInteractionPossible(bool objectInHand)
     {
         return (containedGameObject != null || objectInHand == true);
+    }
+
+    public void ChangeObjectMesh(InteractablePickable interactable, bool setAlternative)
+    {
+        if (interactable.HasAlternativeMesh)
+        {
+            interactable.transform.GetChild(0).gameObject.SetActive(!setAlternative);
+            interactable.transform.GetChild(1).gameObject.SetActive(setAlternative);
+        }
     }
 
     public void Interact()

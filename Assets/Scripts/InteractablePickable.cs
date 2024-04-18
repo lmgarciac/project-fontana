@@ -6,6 +6,9 @@ public class InteractablePickable : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private string interactablePrompt;
+    [SerializeField]
+    private bool hasAlternativeMesh;
+
     private bool isPickableObject;
     private bool isContainerObject;
 
@@ -16,6 +19,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     public string InteractablePrompt { get => interactablePrompt;}
     public bool IsPickableObject { get => isPickableObject;}
     public bool IsContainerObject { get => isContainerObject; }
+    public bool HasAlternativeMesh { get => hasAlternativeMesh; }
     public GameObject ContainedGameObject { get => containedGameObject; }
 
     protected virtual void Start()
@@ -44,11 +48,23 @@ public class InteractablePickable : MonoBehaviour, IInteractable
         transform.localRotation = Quaternion.identity;
         containedGameObject = null;
 
+        //This is needed for using changing the object mesh while picking it up/placing it down
+        ChangeObjectMesh(this, true);
+
         return interactableGameObject;
     }
     public bool IsInteractionPossible(bool objectInHand)
     {
         return true;
+    }
+
+    public void ChangeObjectMesh(InteractablePickable interactable, bool setAlternative)
+    {
+        if (interactable.HasAlternativeMesh)
+        {
+            interactable.transform.GetChild(0).gameObject.SetActive(!setAlternative);
+            interactable.transform.GetChild(1).gameObject.SetActive(setAlternative);
+        }
     }
 
     public void PlaceInside(GameObject objectToPlace)

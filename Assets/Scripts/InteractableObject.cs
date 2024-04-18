@@ -35,10 +35,6 @@ public class InteractableObject : MonoBehaviour, IInteractable
         return transform;
     }
 
-    public void Interact(GameObject interactorObject)
-    {
-        Debug.Log("INTERACTING WITH INTERACTIVE OBJECT: " + interactablePrompt);
-    }
     public bool IsInteractionPossible(bool objectInHand)
     {
         return true;
@@ -46,7 +42,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("INTERACTING WITH INTERACTIVE OBJECT: " + interactablePrompt);
     }
 
     public GameObject PickUp(Transform playerHand)
@@ -60,6 +56,11 @@ public class InteractableObject : MonoBehaviour, IInteractable
     }
 
     public GameObject Replace(GameObject objectToPlace, Transform playerHand)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void ChangeObjectMesh(InteractablePickable interactable, bool setAlternative)
     {
         throw new System.NotImplementedException();
     }

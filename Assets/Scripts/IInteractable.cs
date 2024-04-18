@@ -9,11 +9,13 @@ public interface IInteractable
     GameObject ContainedGameObject { get; }
 
     void Interact();
-    GameObject PickUp(Transform playerHand);
+
+    void ChangeObjectMesh(InteractablePickable interactable, bool setAlternative);
     void PlaceInside(GameObject objectToPlace);
+    GameObject PickUp(Transform playerHand);
     GameObject Replace(GameObject objectToPlace, Transform playerHand);
 
-    string GetInteractPrompt(string objectInHand = null);
     Transform GetTransform();
+    string GetInteractPrompt(string objectInHand = null);
     bool IsInteractionPossible(bool objectInHand);
 }
