@@ -48,8 +48,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
         transform.localRotation = Quaternion.identity;
         containedGameObject = null;
 
-        //This is needed for using changing the object mesh while picking it up/placing it down
-        ChangeObjectMesh(this, true);
+        ChangeObjectMesh(this, false); //This way it always displays non-alternative mesh on hand (child 0)
 
         return interactableGameObject;
     }

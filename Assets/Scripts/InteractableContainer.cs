@@ -6,6 +6,8 @@ public class InteractableContainer : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private string interactablePrompt;
+    [SerializeField]
+    private bool activatesAlternativeMesh;
     private bool isPickableObject;
     private bool isContainerObject;
 
@@ -16,6 +18,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     public string InteractablePrompt { get => interactablePrompt;}
     public bool IsPickableObject { get => isPickableObject;}
     public bool IsContainerObject { get => isContainerObject; }
+    public bool ActivatesAlternativeMesh { get => activatesAlternativeMesh;}
     public GameObject ContainedGameObject { get => containedGameObject; }
 
     private void Start()
@@ -54,8 +57,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
 
         returnContained.GetComponent<Collider>().enabled = true;
 
-        //This is needed for using changing the object mesh while picking it up/placing it down
-        ChangeObjectMesh(returnContained.GetComponent<InteractablePickable>(), true);
+        ChangeObjectMesh(returnContained.GetComponent<InteractablePickable>(), false);
 
         return returnContained;
     }
@@ -69,8 +71,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
         objectToPlace.transform.localPosition = Vector3.zero;
         objectToPlace.transform.localRotation = Quaternion.identity;
 
-        //This is needed for using changing the object mesh while picking it up/placing it down
-        ChangeObjectMesh(objectToPlace.GetComponent<InteractablePickable>(), false);
+        ChangeObjectMesh(objectToPlace.GetComponent<InteractablePickable>(), activatesAlternativeMesh);
 
         containedGameObject = objectToPlace;
     }
@@ -86,11 +87,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
         objectToPlace.transform.localPosition = Vector3.zero;
         objectToPlace.transform.localRotation = Quaternion.identity;
 
-        if (objectToPlace.GetComponent<InteractablePickable>().HasAlternativeMesh)
-        {
-            objectToPlace.transform.GetChild(0).gameObject.SetActive(true);
-            objectToPlace.transform.GetChild(1).gameObject.SetActive(false);
-        }
+        ChangeObjectMesh(objectToPlace.GetComponent<InteractablePickable>(), activatesAlternativeMesh);
 
         containedGameObject.transform.parent = playerHand;
         containedGameObject.transform.localPosition = Vector3.zero;
