@@ -5,6 +5,8 @@ using UnityEngine;
 public class InteractablePickable : MonoBehaviour, IInteractable
 {
     [SerializeField]
+    private string interactableName;
+    [SerializeField]
     private string interactablePrompt;
     [SerializeField]
     private bool hasAlternativeMesh;
@@ -16,6 +18,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     private GameObject containedGameObject;
 
     public GameObject InteractableGameObject { get => interactableGameObject; }
+    public string InteractableName { get => interactableName; }
     public string InteractablePrompt { get => interactablePrompt;}
     public bool IsPickableObject { get => isPickableObject;}
     public bool IsContainerObject { get => isContainerObject; }

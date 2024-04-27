@@ -5,6 +5,8 @@ using UnityEngine;
 public class InteractableContainer : MonoBehaviour, IInteractable
 {
     [SerializeField]
+    private string interactableNameExpected;
+    [SerializeField]
     private string interactablePrompt;
     [SerializeField]
     private bool activatesAlternativeMesh;
@@ -20,6 +22,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     public bool IsContainerObject { get => isContainerObject; }
     public bool ActivatesAlternativeMesh { get => activatesAlternativeMesh;}
     public GameObject ContainedGameObject { get => containedGameObject; }
+    public string InteractableNameExpected { get => interactableNameExpected; }
 
     private void Start()
     {
@@ -66,6 +69,11 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     {
         Debug.Log($"Place {objectToPlace.name} inside container {this.name}");
 
+        if (objectToPlace.GetComponent<InteractablePickable>().InteractableName == interactableNameExpected) //There are more performant options for sure
+        {
+            //Trigger event, set some variable in GameManager, etc
+        }
+
         objectToPlace.GetComponent<Collider>().enabled = false;
         objectToPlace.transform.parent = transform;
         objectToPlace.transform.localPosition = Vector3.zero;
@@ -81,19 +89,11 @@ public class InteractableContainer : MonoBehaviour, IInteractable
         Debug.Log($"Replace {containedGameObject.name} inside container {this.name} with {objectToPlace.name}");
 
         GameObject returnContained = containedGameObject;
-
-        objectToPlace.GetComponent<Collider>().enabled = false;
-        objectToPlace.transform.parent = transform;
-        objectToPlace.transform.localPosition = Vector3.zero;
-        objectToPlace.transform.localRotation = Quaternion.identity;
-
-        ChangeObjectMesh(objectToPlace.GetComponent<InteractablePickable>(), activatesAlternativeMesh);
-
         containedGameObject.transform.parent = playerHand;
         containedGameObject.transform.localPosition = Vector3.zero;
         containedGameObject.transform.localRotation = Quaternion.identity;
 
-        containedGameObject = objectToPlace;
+        PlaceInside(objectToPlace);
         
         returnContained.GetComponent<Collider>().enabled = true;
 
