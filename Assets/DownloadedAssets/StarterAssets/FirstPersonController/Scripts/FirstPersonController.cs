@@ -86,7 +86,12 @@ namespace StarterAssets
 			}
 		}
 
-		private void Awake()
+
+        private bool canMoveCamera = true;
+        public bool CanMoveCamera { get => canMoveCamera; set => canMoveCamera = value; }
+
+
+        private void Awake()
 		{
 			// get a reference to our main camera
 			if (_mainCamera == null)
@@ -119,7 +124,8 @@ namespace StarterAssets
 
 		private void LateUpdate()
 		{
-			CameraRotation();
+			if (canMoveCamera)
+				CameraRotation();
 		}
 
 		private void GroundedCheck()

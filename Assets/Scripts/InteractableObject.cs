@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour, IInteractable
 {
-    [SerializeField]
-    private string interactablePrompt;
+    [SerializeField] private InteractableType interactableType;
+    [SerializeField] private string interactablePrompt;
     private bool isPickableObject;
     private bool isContainerObject;
 
     private GameObject interactableGameObject;
     private GameObject containedGameObject;
 
+    private InteractableParameters interactableParameters;
+
     public GameObject InteractableGameObject { get => interactableGameObject; }
     public string InteractablePrompt { get => interactablePrompt;}
     public bool IsPickableObject { get => isPickableObject;}
     public bool IsContainerObject { get => isContainerObject; }
     public GameObject ContainedGameObject { get => containedGameObject; }
+    public InteractableParameters InteractableParameters { get => interactableParameters;}
 
     private void Start()
     {
         interactableGameObject = this.gameObject;
         isContainerObject = false;
         isPickableObject = false;
+        interactableParameters = GlobalManager.Instance.GetInteractionParameteres(interactableType);
     }
 
     public string GetInteractPrompt(string objectInHand)

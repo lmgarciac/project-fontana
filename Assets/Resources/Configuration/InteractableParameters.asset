@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 914113e87e147c34cb1af6c9e04e6c3d, type: 3}
+  m_Name: InteractableParameters
+  m_EditorClassIdentifier: 
+  interactableParameters:
+  - interactableIdentifier: 0
+    interactableDescription: A confy bed
+    interactableDialogue:
+    - This bed looks as if it has the ability to take me to strange places
+    - Places where dreams and reality seem to be mixed
+    - It makes me feel uneasy sometimes...
+  - interactableIdentifier: 1
+    interactableDescription: An old telescope
+    interactableDialogue:
+    - I used to watch the stars all night until dawn when I was a kid
+    - There's something about the stars that makes me feel so small, and yet so in
+      touch with the whole universe...
+  - interactableIdentifier: 2
+    interactableDescription: A reclining chair
+    interactableDialogue:
+    - I can hear this chair creaking at night... I really need to fix it
+  - interactableIdentifier: 3
+    interactableDescription: Strange Painting
+    interactableDialogue:
+    - Sometimes I can see out of the corner of my eye as if that painting was coming
+      to life...
+    - I think I need a long vacation
+  - interactableIdentifier: 4
+    interactableDescription: Sticky Notes Board
+    interactableDialogue:
+    - I'm so behind with work...

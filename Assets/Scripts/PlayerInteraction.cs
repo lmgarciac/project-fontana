@@ -1,3 +1,4 @@
+using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,11 @@ public class PlayerInteraction : MonoBehaviour
     private Transform playerEyes;
     [SerializeField]
     private LayerMask interactableLayer;
+    [SerializeField]
+    private PlayerInteractUI playerInteractUI;
+
+    private CharacterController characterController;
+    private FirstPersonController firstPersonController;
 
     private RaycastHit[] raycastArray;
     private GameObject objectInHand;
@@ -22,12 +28,32 @@ public class PlayerInteraction : MonoBehaviour
 
     public GameObject ObjectInHand { get => objectInHand;}
 
+    public Action OnDialogueFinished;
+
+    private void Awake()
+    {
+        characterController = GetComponent<CharacterController>();
+        firstPersonController = GetComponent<FirstPersonController>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             IInteractable interactable = GetInteractableObject();
             objectInHand?.TryGetComponent<IUsable>(out usableObject);
+            
+            if (interactable != null && interactable is InteractableObject) 
+            {
+                characterController.enabled = false;
+                firstPersonController.CanMoveCamera = false;
+
+                InteractableObject interactableObject = (InteractableObject)interactable;
+                if (!playerInteractUI.ShowingDialogue)
+                    playerInteractUI.ShowDialogue(interactableObject.InteractableParameters.interactableDialogue, DialogueFinished);
+                else
+                    playerInteractUI.ContinueDialogue();
+            }
 
             if (interactable == null || (usableObject != null && usableObject.IsBeingUsed()))
             {
@@ -112,6 +138,12 @@ public class PlayerInteraction : MonoBehaviour
         //}
 
         return closestInteractable;
+    }
+
+    private void DialogueFinished()
+    {
+        characterController.enabled = true;
+        firstPersonController.CanMoveCamera = true;
     }
 
 }

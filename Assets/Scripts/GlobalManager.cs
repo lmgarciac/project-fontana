@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class GlobalManager : MonoBehaviour
 {
     private static GlobalManager _instance;
+    private List<InteractableParameters> _interactionParameters;
 
     // Public property to access the singleton instance
     public static GlobalManager Instance
@@ -38,10 +40,34 @@ public class GlobalManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(gameObject);
+        LoadConfigurations();
+    }
+
+    private void LoadConfigurations()
+    {
+        _interactionParameters = Resources.Load<InteractableParametersSO>("Configuration/InteractableParameters").interactableParameters;
     }
 
     void Start()
     {
         Application.targetFrameRate = 60;
+    }
+
+    public InteractableParameters GetInteractionParameteres(InteractableType interactableType)
+    {
+        foreach (var parameter in _interactionParameters) 
+        {
+            if (interactableType == parameter.interactableIdentifier)
+            {
+                return parameter;
+            }
+        }
+
+        return null;
+    }
+
+    public void SetCoplete()
+    {
+
     }
 }
