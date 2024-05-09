@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class InteractableContainer : MonoBehaviour, IInteractable
@@ -10,6 +11,15 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     private string interactablePrompt;
     [SerializeField]
     private bool activatesAlternativeMesh;
+
+    //This should be if the container works as a restoring condition. Use EDITORGUI later so this looks much better
+    [SerializeField]
+    private bool activatesCompletionCondition;
+    [SerializeField]
+    private int paintingID;
+    [SerializeField]
+    private int conditionID;
+
     private bool isPickableObject;
     private bool isContainerObject;
 
@@ -69,9 +79,19 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     {
         Debug.Log($"Place {objectToPlace.name} inside container {this.name}");
 
-        if (objectToPlace.GetComponent<InteractablePickable>().InteractableName == interactableNameExpected) //There are more performant options for sure
+        if (objectToPlace.GetComponent<InteractablePickable>().InteractableName != interactableNameExpected) //There are more performant options for sure
         {
-            //Trigger event, set some variable in GameManager, etc
+            Debug.LogError("THIS ITEM CANT BE PLACED HERE!!!");
+            return;
+        }
+
+        if (activatesCompletionCondition)
+        {
+            RestorationCondition resCondition = new RestorationCondition();
+            resCondition.conditionID = conditionID;
+            resCondition.conditionCompleted = true;
+
+            GlobalManager.Instance.PaintingConditionCompletion(paintingID, resCondition); //I dont like this, change it later
         }
 
         objectToPlace.GetComponent<Collider>().enabled = false;

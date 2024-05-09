@@ -7,6 +7,9 @@ public class GlobalManager : MonoBehaviour
 {
     private static GlobalManager _instance;
     private List<InteractableParameters> _interactionParameters;
+    private Dictionary<int, bool> completedPaintings = new Dictionary<int, bool>();
+
+    public List<PaintingBehaviour> paintings;
 
     // Public property to access the singleton instance
     public static GlobalManager Instance
@@ -53,7 +56,7 @@ public class GlobalManager : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    public InteractableParameters GetInteractionParameteres(InteractableType interactableType)
+    public InteractableParameters GetInteractionParameters(InteractableType interactableType)
     {
         foreach (var parameter in _interactionParameters) 
         {
@@ -66,8 +69,32 @@ public class GlobalManager : MonoBehaviour
         return null;
     }
 
-    public void SetCoplete()
+    public void PaintingStatusChange(int paintingID, bool restoredStatus) //Maybe change name later if something fits better
     {
+        Debug.Log($"Painting {paintingID} status is updating!");
 
+        if (completedPaintings.ContainsKey(paintingID))
+        {
+            completedPaintings[paintingID] = restoredStatus;
+
+            Debug.Log($"Painting {paintingID} status updated!");
+        }
+        else
+        {
+            completedPaintings.Add(paintingID, restoredStatus);
+
+            Debug.Log($"Painting {paintingID} was added to completed paintings list!");
+        }
+    }
+
+    public void PaintingConditionCompletion(int paintingID, RestorationCondition restorationCondition)
+    {
+        foreach (PaintingBehaviour painting in paintings)
+        {
+            if (painting.PaintingID == paintingID)
+            {
+                painting.UpdateRestorationCondition(restorationCondition);
+            }
+        }
     }
 }

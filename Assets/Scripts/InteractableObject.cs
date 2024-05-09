@@ -26,7 +26,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
         interactableGameObject = this.gameObject;
         isContainerObject = false;
         isPickableObject = false;
-        interactableParameters = GlobalManager.Instance.GetInteractionParameteres(interactableType);
+        interactableParameters = GlobalManager.Instance.GetInteractionParameters(interactableType);
     }
 
     public string GetInteractPrompt(string objectInHand)

@@ -1397,10 +1397,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 908874511}
+    - target: {fileID: 2060345445788575837, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: interactableNameExpected
+      value: Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 2168017504940770359, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1545005050}
+    - target: {fileID: 2268414324369993530, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: interactableName
+      value: Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 3267385179143265618, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
