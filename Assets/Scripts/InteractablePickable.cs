@@ -71,16 +71,15 @@ public class InteractablePickable : MonoBehaviour, IInteractable
 
     public void PlaceInside(GameObject objectToPlace)
     {
-        throw new System.NotImplementedException();
     }
 
     public GameObject Replace(GameObject objectToPlace, Transform playerHand)
     {
-        throw new System.NotImplementedException();
+        return null;
     }
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"Interact with item");
     }
 }

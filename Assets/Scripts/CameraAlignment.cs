@@ -12,16 +12,19 @@ public class CameraAlignment : MonoBehaviour
     private Vector3 _distance;
     private float _xAxisTilt = 0f;
 
+    private Quaternion _initialRotation;
+
     private void Awake()
     {
         _portalCamera = GetComponent<Camera>();
         _playerCamera = Camera.main;
+        _initialRotation = this.transform.rotation;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        _direction = Quaternion.Inverse(transform.rotation) * _playerCamera.transform.rotation;
-        _direction = _playerCamera.transform.rotation;
+        //_direction = Quaternion.Inverse(transform.rotation) * _playerCamera.transform.rotation;
+        _direction = _playerCamera.transform.localRotation * _initialRotation;
 
         if (_lockCameraXTilt)
             _xAxisTilt = _portalCamera.transform.localEulerAngles.x;
@@ -30,7 +33,7 @@ public class CameraAlignment : MonoBehaviour
 
 
         _portalCamera.transform.localEulerAngles = new Vector3(_xAxisTilt,
-                                                               _direction.eulerAngles.y + 180,
+                                                               _direction.eulerAngles.y,
                                                                _direction.eulerAngles.z);
     }
 }
