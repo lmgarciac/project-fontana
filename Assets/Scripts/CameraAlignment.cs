@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraAlignment : MonoBehaviour
 {
     [SerializeField] private bool _lockCameraXTilt = false;
+    [SerializeField] private bool _fixed = false;
 
     private Camera _playerCamera;
     private Camera _portalCamera;
@@ -23,6 +24,9 @@ public class CameraAlignment : MonoBehaviour
 
     void LateUpdate()
     {
+        if (_fixed)
+            return;
+
         //_direction = Quaternion.Inverse(transform.rotation) * _playerCamera.transform.rotation;
         _direction = _playerCamera.transform.localRotation * _initialRotation;
 
