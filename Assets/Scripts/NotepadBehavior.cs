@@ -7,16 +7,9 @@ public class NotepadBehavior : InteractablePickable, IUsable
     [SerializeField] Transform notepad_top;
     [SerializeField] Transform notepad_bottom;
     
-    private ObjectType objectType;
     private bool isBeingUsed;
     private Vector3 previousPosition;
     private Quaternion previousRotation;
-
-    protected override void Start()
-    {
-        base.Start();
-        objectType = ObjectType.Notebook;
-    }
 
     public void Use(Transform focusTarget)
     {
@@ -47,14 +40,15 @@ public class NotepadBehavior : InteractablePickable, IUsable
 
     }
 
-    public ObjectType GetObjectType()
-    {
-        return objectType;
-    }
-
     public bool IsBeingUsed()
     {
         return isBeingUsed;
+    }
+
+    public override void SendToInventory()
+    {
+        base.SendToInventory();
+        GlobalManager.Instance.PlayerInteractUI.ShowNotepad(true);
     }
 }
 

@@ -11,6 +11,7 @@ public enum InteractableType
     RecliningChair = 2,
     StoragePainting = 3,
     StickyNotesBoard = 4,
+    Notepad = 5,
 }
 
 [CreateAssetMenu(fileName = "InteractableParameters", menuName = "Interactable Parameters", order = 51)]
@@ -25,4 +26,6 @@ public class InteractableParameters
     public InteractableType interactableIdentifier;
     public string interactableDescription;
     public List<string> interactableDialogue;
+    public List<string> pickupDialogue;
+    public bool isInventoryItem;
 }

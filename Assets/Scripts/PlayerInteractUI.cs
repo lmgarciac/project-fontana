@@ -113,4 +113,9 @@ public class PlayerInteractUI : MonoBehaviour
 
         OnDialogueFinished?.Invoke();
     }
+
+    public void ShowNotepad(bool show)
+    {
+        Debug.Log($"Showing notepad in UI. Implement this.");
+    }
 }

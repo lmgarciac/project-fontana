@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InteractablePickable : MonoBehaviour, IInteractable
 {
+    [SerializeField] private InteractableType interactableType;
     [SerializeField]
     private string interactableName;
     [SerializeField]
@@ -17,6 +18,8 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     private GameObject interactableGameObject;
     private GameObject containedGameObject;
 
+    private InteractableParameters interactableParameters;
+
     public GameObject InteractableGameObject { get => interactableGameObject; }
     public string InteractableName { get => interactableName; }
     public string InteractablePrompt { get => interactablePrompt;}
@@ -24,12 +27,14 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     public bool IsContainerObject { get => isContainerObject; }
     public bool HasAlternativeMesh { get => hasAlternativeMesh; }
     public GameObject ContainedGameObject { get => containedGameObject; }
+    public InteractableParameters InteractableParameters { get => interactableParameters; }
 
     protected virtual void Start()
     {
         interactableGameObject = this.gameObject;
         isContainerObject = false;
         isPickableObject = true;
+        interactableParameters = GlobalManager.Instance.GetInteractionParameters(interactableType);
     }
 
     public string GetInteractPrompt(string objectInHand)
@@ -44,17 +49,32 @@ public class InteractablePickable : MonoBehaviour, IInteractable
 
     public GameObject PickUp(Transform playerHand)
     {
-        Debug.Log($"PickUp {interactableGameObject.name}");
+        if (!InteractableParameters.isInventoryItem)
+        {
+            Debug.Log($"PickUp {interactableGameObject.name}");
 
-        transform.parent = playerHand;
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        containedGameObject = null;
+            transform.parent = playerHand;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            containedGameObject = null;
 
-        ChangeObjectMesh(this, false); //This way it always displays non-alternative mesh on hand (child 0)
+            ChangeObjectMesh(this, false); //This way it always displays non-alternative mesh on hand (child 0)
 
-        return interactableGameObject;
+            return interactableGameObject;
+        }
+        else
+        {
+            transform.gameObject.SetActive(false);
+            SendToInventory();
+            return null;
+        }
     }
+
+    public virtual void SendToInventory()
+    {
+        Debug.Log($"Sending {interactableGameObject.name} to inventory");
+    }
+
     public bool IsInteractionPossible(bool objectInHand)
     {
         return true;
@@ -82,4 +102,6 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     {
         Debug.Log($"Interact with item");
     }
+
+
 }

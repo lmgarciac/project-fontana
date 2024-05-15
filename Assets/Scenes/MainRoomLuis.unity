@@ -1935,6 +1935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016f7b84f4772aa48ba2e36bb53201b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 0
   interactableName: obj_painting
   interactablePrompt: Pick "The Bedroom"
   hasAlternativeMesh: 1
@@ -1943,7 +1944,6 @@ MonoBehaviour:
   - conditionID: 1
     conditionName: Place jar in room
     conditionCompleted: 0
-  InEasel: 1
 --- !u!1 &970614110
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,6 +4093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bef2ca616125544aec44144f6fd83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 0
   interactableName: obj_jar
   interactablePrompt: Pickup Jar
   hasAlternativeMesh: 0
@@ -4125,6 +4126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d99b7fbb50bf90439e9d13040379a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInteractUI: {fileID: 1469590559}
   paintings:
   - {fileID: 1856784475}
 --- !u!4 &1887263287
@@ -4643,6 +4645,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2769043759534830766, guid: 9375a3390669bf34980e52735fc0ba1e, type: 3}
+      propertyPath: interactableType
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3988409070246551386, guid: 9375a3390669bf34980e52735fc0ba1e, type: 3}
       propertyPath: m_Name
       value: Notepad

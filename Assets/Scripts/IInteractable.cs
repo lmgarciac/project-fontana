@@ -6,8 +6,9 @@ public interface IInteractable
     bool IsPickableObject { get; }
     bool IsContainerObject { get; }
     GameObject InteractableGameObject { get; }
-    GameObject ContainedGameObject { get; }
-
+    GameObject ContainedGameObject { get; }   
+    InteractableParameters InteractableParameters { get; }
+    
     void Interact();
 
     void ChangeObjectMesh(InteractablePickable interactable, bool setAlternative);

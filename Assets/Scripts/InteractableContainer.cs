@@ -25,6 +25,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
 
     private GameObject interactableGameObject;
     private GameObject containedGameObject;
+    private InteractableParameters interactableParameters;
 
     public GameObject InteractableGameObject { get => interactableGameObject; }
     public string InteractablePrompt { get => interactablePrompt;}
@@ -33,6 +34,8 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     public bool ActivatesAlternativeMesh { get => activatesAlternativeMesh;}
     public GameObject ContainedGameObject { get => containedGameObject; }
     public string InteractableNameExpected { get => interactableNameExpected; }
+
+    public InteractableParameters InteractableParameters { get => interactableParameters; }
 
     private void Start()
     {
@@ -136,6 +139,5 @@ public class InteractableContainer : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
     }
 }

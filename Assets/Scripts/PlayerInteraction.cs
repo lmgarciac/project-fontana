@@ -48,9 +48,9 @@ public class PlayerInteraction : MonoBehaviour
                 characterController.enabled = false;
                 firstPersonController.CanMoveCamera = false;
 
-                InteractableObject interactableObject = (InteractableObject)interactable;
+                //InteractableObject interactableObject = (InteractableObject)interactable;
                 if (!playerInteractUI.ShowingDialogue)
-                    playerInteractUI.ShowDialogue(interactableObject.InteractableParameters.interactableDialogue, DialogueFinished);
+                    playerInteractUI.ShowDialogue(interactable.InteractableParameters.interactableDialogue, DialogueFinished);
                 else
                     playerInteractUI.ContinueDialogue();
             }
@@ -64,7 +64,17 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable.IsPickableObject && objectInHand == null)
             {
-                objectInHand = interactable.PickUp(playerHand);
+                if (interactable.InteractableParameters.pickupDialogue != null && 
+                    interactable.InteractableParameters.pickupDialogue.Count != 0)
+                {
+                    if (!playerInteractUI.ShowingDialogue)
+                        playerInteractUI.ShowDialogue(interactable.InteractableParameters.pickupDialogue, PickupDialogueFinished);
+                    else
+                        playerInteractUI.ContinueDialogue();
+                }
+                else
+                    objectInHand = interactable.PickUp(playerHand);
+
                 return;
             }
             else if (interactable.IsContainerObject)
@@ -146,4 +156,10 @@ public class PlayerInteraction : MonoBehaviour
         firstPersonController.CanMoveCamera = true;
     }
 
+    private void PickupDialogueFinished()
+    {
+        characterController.enabled = true;
+        firstPersonController.CanMoveCamera = true;
+        Debug.LogError("Call Pickup Here");
+    }
 }

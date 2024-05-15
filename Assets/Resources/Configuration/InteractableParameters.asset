@@ -19,23 +19,40 @@ MonoBehaviour:
     - This bed looks as if it has the ability to take me to strange places
     - Places where dreams and reality seem to be mixed
     - It makes me feel uneasy sometimes...
+    pickupDialogue: []
+    isInventoryItem: 0
   - interactableIdentifier: 1
     interactableDescription: An old telescope
     interactableDialogue:
     - I used to watch the stars all night until dawn when I was a kid
     - There's something about the stars that makes me feel so small, and yet so in
       touch with the whole universe...
+    pickupDialogue: []
+    isInventoryItem: 0
   - interactableIdentifier: 2
     interactableDescription: A reclining chair
     interactableDialogue:
     - I can hear this chair creaking at night... I really need to fix it
+    pickupDialogue: []
+    isInventoryItem: 0
   - interactableIdentifier: 3
     interactableDescription: Strange Painting
     interactableDialogue:
     - Sometimes I can see out of the corner of my eye as if that painting was coming
       to life...
     - I think I need a long vacation
+    pickupDialogue: []
+    isInventoryItem: 0
   - interactableIdentifier: 4
     interactableDescription: Sticky Notes Board
     interactableDialogue:
     - I'm so behind with work...
+    pickupDialogue: []
+    isInventoryItem: 0
+  - interactableIdentifier: 5
+    interactableDescription: Notepad
+    interactableDialogue: []
+    pickupDialogue:
+    - My old trusty notepad.
+    - I'm gonna need this if I ever plan on getting some work done.
+    isInventoryItem: 1

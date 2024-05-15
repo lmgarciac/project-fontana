@@ -8,6 +8,8 @@ public class GlobalManager : MonoBehaviour
     private static GlobalManager _instance;
     private List<InteractableParameters> _interactionParameters;
     private Dictionary<int, bool> completedPaintings = new Dictionary<int, bool>();
+       
+    [SerializeField] private PlayerInteractUI playerInteractUI;
 
     public List<PaintingBehaviour> paintings;
 
@@ -32,6 +34,8 @@ public class GlobalManager : MonoBehaviour
             return _instance;
         }
     }
+
+    public PlayerInteractUI PlayerInteractUI { get => playerInteractUI;}
 
     private void Awake()
     {
