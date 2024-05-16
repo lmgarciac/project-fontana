@@ -82,7 +82,9 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     {
         Debug.Log($"Place {objectToPlace.name} inside container {this.name}");
 
-        if (objectToPlace.GetComponent<InteractablePickable>().InteractableName != interactableNameExpected) //There are more performant options for sure
+        string objName = objectToPlace.GetComponent<InteractablePickable>().InteractableName;
+
+        if (objName != interactableNameExpected) //There are more performant options for sure
         {
             Debug.LogError("THIS ITEM CANT BE PLACED HERE!!!");
             return;
@@ -90,11 +92,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
 
         if (activatesCompletionCondition)
         {
-            RestorationCondition resCondition = new RestorationCondition();
-            resCondition.conditionID = conditionID;
-            resCondition.conditionCompleted = true;
-
-            GlobalManager.Instance.PaintingConditionCompletion(paintingID, resCondition); //I dont like this, change it later
+            GlobalManager.Instance.PaintingConditionCompletion(paintingID, objName); //I dont like this, change it later
         }
 
         objectToPlace.GetComponent<Collider>().enabled = false;

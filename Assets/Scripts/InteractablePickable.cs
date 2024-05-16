@@ -29,7 +29,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     public GameObject ContainedGameObject { get => containedGameObject; }
     public InteractableParameters InteractableParameters { get => interactableParameters; }
 
-    protected virtual void Start()
+    public virtual void Start()
     {
         interactableGameObject = this.gameObject;
         isContainerObject = false;

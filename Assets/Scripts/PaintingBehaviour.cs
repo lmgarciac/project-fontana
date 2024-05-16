@@ -8,42 +8,43 @@ public class PaintingBehaviour : InteractablePickable
 {
     [SerializeField]
     private int paintingID;
-    [SerializeField]
-    private RestorationCondition[] completionConditions;
+    [SerializeField] 
+    private List<PaintingConditions> paintingConditions;
 
-    private Dictionary<int, bool> restorationConditions = new Dictionary<int, bool>();
+    private CompletionConditions completionConditions;
+    private bool allConditionsMet;
 
     public int PaintingID { get => paintingID; set => paintingID = value; }
 
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
-        foreach (RestorationCondition condition in completionConditions)
-        {
-            restorationConditions.Add(condition.conditionID, condition.conditionCompleted);
-        }
+        paintingConditions = GlobalManager.Instance.GetPaintingConditions(paintingID); //This gets the painting conditions for the painting duh
     }
 
-    public void UpdateRestorationCondition(RestorationCondition restorationCondition)
+    public void UpdateRestorationCondition(string itemPlacedName) //Rework this later to implement dialogue choices
     {
-        restorationConditions[restorationCondition.conditionID] = restorationCondition.conditionCompleted;
-        Debug.Log($"Condition {restorationCondition.conditionID} updated!");
+        allConditionsMet = true;
 
-        foreach (var condition in restorationConditions)
+        foreach (var condition in paintingConditions)
         {
-            if (condition.Value != true)
+            if (condition.itemToPlace == itemPlacedName)
             {
-                UpdatePainting(false);
-                return;
+                condition.completedCondition = true;
+            }
+
+            if (!condition.completedCondition)
+            {
+                allConditionsMet = false;
             }
         }
-        UpdatePainting(true); //All this has to be refactored into better, more tidied up code
+
+        UpdatePainting(allConditionsMet);
     }
 
     private void UpdatePainting(bool completionStatus)
     {
         //Sets the painting status in global manager
         GlobalManager.Instance.PaintingStatusChange(PaintingID, completionStatus);
-        Debug.Log($"Painting {PaintingID} status updated!");
     }
 }

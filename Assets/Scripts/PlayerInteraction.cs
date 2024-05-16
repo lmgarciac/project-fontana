@@ -62,18 +62,18 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
 
-            if (interactable.IsPickableObject && objectInHand == null)
+            if (interactable is InteractablePickable pickable && objectInHand == null)
             {
-                if (interactable.InteractableParameters.pickupDialogue != null && 
-                    interactable.InteractableParameters.pickupDialogue.Count != 0)
+                objectInHand = pickable.PickUp(playerHand);
+
+                if (pickable.InteractableParameters.pickupDialogue != null &&
+                    pickable.InteractableParameters.pickupDialogue.Count != 0)
                 {
                     if (!playerInteractUI.ShowingDialogue)
-                        playerInteractUI.ShowDialogue(interactable.InteractableParameters.pickupDialogue, PickupDialogueFinished);
+                        playerInteractUI.ShowDialogue(pickable.InteractableParameters.pickupDialogue, PickupDialogueFinished);
                     else
                         playerInteractUI.ContinueDialogue();
                 }
-                else
-                    objectInHand = interactable.PickUp(playerHand);
 
                 return;
             }

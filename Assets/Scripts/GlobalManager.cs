@@ -7,8 +7,9 @@ public class GlobalManager : MonoBehaviour
 {
     private static GlobalManager _instance;
     private List<InteractableParameters> _interactionParameters;
+    private List<PaintingConditions> _paintingConditions;
     private Dictionary<int, bool> completedPaintings = new Dictionary<int, bool>();
-       
+
     [SerializeField] private PlayerInteractUI playerInteractUI;
 
     public List<PaintingBehaviour> paintings;
@@ -35,7 +36,7 @@ public class GlobalManager : MonoBehaviour
         }
     }
 
-    public PlayerInteractUI PlayerInteractUI { get => playerInteractUI;}
+    public PlayerInteractUI PlayerInteractUI { get => playerInteractUI; }
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class GlobalManager : MonoBehaviour
     private void LoadConfigurations()
     {
         _interactionParameters = Resources.Load<InteractableParametersSO>("Configuration/InteractableParameters").interactableParameters;
+        _paintingConditions = Resources.Load<CompletionConditions>("Configuration/CompletionConditions").completionConditions;
     }
 
     void Start()
@@ -62,7 +64,7 @@ public class GlobalManager : MonoBehaviour
 
     public InteractableParameters GetInteractionParameters(InteractableType interactableType)
     {
-        foreach (var parameter in _interactionParameters) 
+        foreach (var parameter in _interactionParameters)
         {
             if (interactableType == parameter.interactableIdentifier)
             {
@@ -73,6 +75,21 @@ public class GlobalManager : MonoBehaviour
         return null;
     }
 
+    public List<PaintingConditions> GetPaintingConditions(int paintingID)
+    {
+        List<PaintingConditions> conditions = new List<PaintingConditions>();
+
+        foreach (var condition in _paintingConditions)
+        {
+            if (paintingID == condition.paintingID)
+            {
+                conditions.Add(condition);
+            }
+        }
+
+        return conditions;
+    }
+
     public void PaintingStatusChange(int paintingID, bool restoredStatus) //Maybe change name later if something fits better
     {
         Debug.Log($"Painting {paintingID} status is updating!");
@@ -81,23 +98,23 @@ public class GlobalManager : MonoBehaviour
         {
             completedPaintings[paintingID] = restoredStatus;
 
-            Debug.Log($"Painting {paintingID} status updated!");
+            Debug.Log($"Painting {paintingID} status updated!. Status {restoredStatus}");
         }
         else
         {
             completedPaintings.Add(paintingID, restoredStatus);
 
-            Debug.Log($"Painting {paintingID} was added to completed paintings list!");
+            Debug.Log($"Painting {paintingID} was added to completed paintings list!. Status {restoredStatus}");
         }
     }
 
-    public void PaintingConditionCompletion(int paintingID, RestorationCondition restorationCondition)
+    public void PaintingConditionCompletion(int paintingID, string itemPlacedName)
     {
         foreach (PaintingBehaviour painting in paintings)
         {
             if (painting.PaintingID == paintingID)
             {
-                painting.UpdateRestorationCondition(restorationCondition);
+                painting.UpdateRestorationCondition(itemPlacedName);
             }
         }
     }
