@@ -12,6 +12,7 @@ public enum InteractableType
     StoragePainting = 3,
     StickyNotesBoard = 4,
     Notepad = 5,
+    Stranger = 6,
 }
 
 [CreateAssetMenu(fileName = "InteractableParameters", menuName = "Interactable Parameters", order = 51)]

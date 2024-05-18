@@ -56,3 +56,16 @@ MonoBehaviour:
     - My old trusty notepad.
     - I'm gonna need this if I ever plan on getting some work done.
     isInventoryItem: 1
+  - interactableIdentifier: 6
+    interactableDescription: Non Playable Character
+    interactableDialogue:
+    - 'Hallo daar... prachtige zonsondergang toch? '
+    - Oh, don't speak dutch? Don't you worry, spent my years back in England too.
+    - Sunsets like this make me reminisce about sweet old home. A shame I couldn't
+      share it with somebody.
+    - I've poked around your bedroom a bit, seems fair since it looks like you've
+      done the same with mine, heh. Beautiful paintings, I would love to talk about
+      them some other time...
+    - '[VAN GOGH SHOULD DISSAPEAR AFTER THIS DIALOGUE]'
+    pickupDialogue: []
+    isInventoryItem: 0
