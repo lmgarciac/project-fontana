@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NPC_Stranger : InteractableObject
 {
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
         Debug.LogError("START STRANGER");

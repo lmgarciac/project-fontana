@@ -21,7 +21,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public GameObject ContainedGameObject { get => containedGameObject; }
     public InteractableParameters InteractableParameters { get => interactableParameters;}
 
-    private void Start()
+    public virtual void Start()
     {
         interactableGameObject = this.gameObject;
         isContainerObject = false;
@@ -44,7 +44,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
         return true;
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
         Debug.Log("INTERACTING WITH INTERACTIVE OBJECT: " + interactablePrompt);
     }
