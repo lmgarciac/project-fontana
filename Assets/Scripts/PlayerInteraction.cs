@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -48,11 +49,19 @@ public class PlayerInteraction : MonoBehaviour
                 characterController.enabled = false;
                 firstPersonController.CanMoveCamera = false;
 
-                //InteractableObject interactableObject = (InteractableObject)interactable;
-                if (!playerInteractUI.ShowingDialogue)
-                    playerInteractUI.ShowDialogue(interactable.InteractableParameters.interactableDialogue, DialogueFinished);
-                else
-                    playerInteractUI.ContinueDialogue();
+                if (interactable.InteractableParameters.pickupDialogue != null &&
+                    interactable.InteractableParameters.pickupDialogue.Count != 0)
+                {
+                    if (!playerInteractUI.ShowingDialogue)
+                        playerInteractUI.ShowDialogue(interactable.InteractableParameters.interactableDialogue, DialogueFinished, interactable);
+                    else
+                        playerInteractUI.ContinueDialogue();
+
+                    return;
+                }
+
+                characterController.enabled = true;
+                firstPersonController.CanMoveCamera = true;
             }
 
             if (interactable == null || (usableObject != null && usableObject.IsBeingUsed()))
@@ -64,16 +73,24 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable is InteractablePickable pickable && objectInHand == null)
             {
-                objectInHand = pickable.PickUp(playerHand);
+                characterController.enabled = false;
+                firstPersonController.CanMoveCamera = false;
 
                 if (pickable.InteractableParameters.pickupDialogue != null &&
                     pickable.InteractableParameters.pickupDialogue.Count != 0)
                 {
                     if (!playerInteractUI.ShowingDialogue)
-                        playerInteractUI.ShowDialogue(pickable.InteractableParameters.pickupDialogue, PickupDialogueFinished);
+                        playerInteractUI.ShowDialogue(pickable.InteractableParameters.pickupDialogue, PickupDialogueFinished, interactable);
                     else
                         playerInteractUI.ContinueDialogue();
+
+                    return;
                 }
+
+                characterController.enabled = true;
+                firstPersonController.CanMoveCamera = true;
+
+                objectInHand = pickable.PickUp(playerHand);
 
                 return;
             }
@@ -92,6 +109,20 @@ public class PlayerInteraction : MonoBehaviour
             }
 
             interactable.Interact(); //This is for interactables that are not pickable or containers
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            IInteractable notepad = GlobalManager.Instance.GetFromInventory(InteractableType.Notepad);
+            if (notepad != null)
+            {
+                NotepadBehavior notepadBehavior = (NotepadBehavior)notepad;
+
+                if (!notepadBehavior.IsBeingUsed()) notepadBehavior.Use(playerEyes);
+                else notepadBehavior.Unuse(playerHand);
+            }
+            else
+                Debug.Log("You don't have the Notepad");
         }
     }
 
@@ -150,16 +181,17 @@ public class PlayerInteraction : MonoBehaviour
         return closestInteractable;
     }
 
-    private void DialogueFinished()
+    private void DialogueFinished(IInteractable interactable)
     {
         characterController.enabled = true;
         firstPersonController.CanMoveCamera = true;
     }
 
-    private void PickupDialogueFinished()
+    private void PickupDialogueFinished(IInteractable interactable)
     {
         characterController.enabled = true;
         firstPersonController.CanMoveCamera = true;
-        Debug.LogError("Call Pickup Here");
+
+        interactable.PickUp(playerHand);
     }
 }

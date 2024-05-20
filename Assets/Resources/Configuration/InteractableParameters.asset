@@ -55,6 +55,7 @@ MonoBehaviour:
     pickupDialogue:
     - My old trusty notepad.
     - I'm gonna need this if I ever plan on getting some work done.
+    - '- Press [Tab] at any moment to access your notes -'
     isInventoryItem: 1
   - interactableIdentifier: 6
     interactableDescription: Non Playable Character

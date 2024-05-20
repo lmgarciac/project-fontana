@@ -9,6 +9,7 @@ public class GlobalManager : MonoBehaviour
     private List<InteractableParameters> _interactionParameters;
     private List<PaintingConditions> _paintingConditions;
     private Dictionary<int, bool> completedPaintings = new Dictionary<int, bool>();
+    private Dictionary<InteractableType, IInteractable> pickedUpItems = new Dictionary<InteractableType, IInteractable>();
 
     [SerializeField] private PlayerInteractUI playerInteractUI;
 
@@ -117,5 +118,18 @@ public class GlobalManager : MonoBehaviour
                 painting.UpdateRestorationCondition(itemPlacedName);
             }
         }
+    }
+
+    public void AddToInventory(InteractableType inventoryItem, IInteractable item)
+    {
+        pickedUpItems.Add(inventoryItem, item);
+    }
+
+    public IInteractable GetFromInventory(InteractableType inventoryItem)
+    {
+        IInteractable interactable = null;
+        pickedUpItems.TryGetValue(inventoryItem, out interactable);
+
+        return interactable;
     }
 }

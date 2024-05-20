@@ -72,6 +72,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
 
     public virtual void SendToInventory()
     {
+        GlobalManager.Instance.AddToInventory(interactableType, this);
         Debug.Log($"Sending {interactableGameObject.name} to inventory");
     }
 

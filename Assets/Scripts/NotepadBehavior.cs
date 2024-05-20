@@ -13,6 +13,9 @@ public class NotepadBehavior : InteractablePickable, IUsable
 
     public void Use(Transform focusTarget)
     {
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
         GetComponent<Collider>().enabled = false;
 
         previousPosition = transform.localPosition;
@@ -38,6 +41,8 @@ public class NotepadBehavior : InteractablePickable, IUsable
 
         GetComponent<Collider>().enabled = true;
 
+        if (gameObject.activeSelf)
+            gameObject.SetActive(false);
     }
 
     public bool IsBeingUsed()

@@ -53,7 +53,7 @@ public class PlayerInteractUI : MonoBehaviour
         containerGameObject.SetActive(false);
     }
 
-    public void ShowDialogue(List<string> dialogueList, Action OnDialogueFinished)
+    public void ShowDialogue(List<string> dialogueList, Action<IInteractable> OnDialogueFinished, IInteractable interactable)
     {
         if (dialogueList == null || dialogueList.Count == 0)
             return;
@@ -61,7 +61,7 @@ public class PlayerInteractUI : MonoBehaviour
         if (dialogueCoroutine == null)
         {
             dialogueBox.gameObject.SetActive(true);
-            dialogueCoroutine = StartCoroutine(DisplayDialogue(dialogueList, OnDialogueFinished));
+            dialogueCoroutine = StartCoroutine(DisplayDialogue(dialogueList, OnDialogueFinished, interactable));
             showingDialogue = true;
         }
     }
@@ -71,7 +71,7 @@ public class PlayerInteractUI : MonoBehaviour
         continueDialogue = true;
     }
 
-    private IEnumerator DisplayDialogue(List<string> dialogueList, Action OnDialogueFinished)
+    private IEnumerator DisplayDialogue(List<string> dialogueList, Action<IInteractable> OnDialogueFinished, IInteractable interactable)
     {
         dialogueBox.alpha = 0f;
 
@@ -111,7 +111,7 @@ public class PlayerInteractUI : MonoBehaviour
         continueDialogue = false;
         dialogueBox.gameObject.SetActive(false);
 
-        OnDialogueFinished?.Invoke();
+        OnDialogueFinished?.Invoke(interactable);
     }
 
     public void ShowNotepad(bool show)
