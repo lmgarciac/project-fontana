@@ -106,6 +106,9 @@ public class GlobalManager : MonoBehaviour
             completedPaintings.Add(paintingID, restoredStatus);
 
             Debug.Log($"Painting {paintingID} was added to completed paintings list!. Status {restoredStatus}");
+
+            //TODO: Make it work for both notepad sides in the future, depending on which page the painting is on.
+            ((NotepadBehavior)GetFromInventory(InteractableType.Notepad)).SetPageComplete(PageSide.RIGHTPAGE, restoredStatus); 
         }
     }
 

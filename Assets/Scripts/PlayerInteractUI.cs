@@ -16,6 +16,10 @@ public class PlayerInteractUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueBoxText;
     [SerializeField] private TextMeshProUGUI ellipsis;
 
+    [Header("Notepad Parameters")]
+    [SerializeField] private GameObject notepadIcon;
+    [SerializeField] bool showNotepadIcon = true;
+
     private bool showingDialogue = false;
     private bool continueDialogue = false;
     private Coroutine dialogueCoroutine;
@@ -114,8 +118,11 @@ public class PlayerInteractUI : MonoBehaviour
         OnDialogueFinished?.Invoke(interactable);
     }
 
-    public void ShowNotepad(bool show)
+    public void ShowNotepadIcon(bool show)
     {
-        Debug.Log($"Showing notepad in UI. Implement this.");
+        if (!showNotepadIcon)
+            return;
+
+        notepadIcon.SetActive(show);
     }
 }
