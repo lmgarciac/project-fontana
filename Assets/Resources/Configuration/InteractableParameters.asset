@@ -70,3 +70,8 @@ MonoBehaviour:
     - '[VAN GOGH SHOULD DISSAPEAR AFTER THIS DIALOGUE]'
     pickupDialogue: []
     isInventoryItem: 0
+  - interactableIdentifier: 7
+    interactableDescription: Painting The Bedroom
+    interactableDialogue: []
+    pickupDialogue: []
+    isInventoryItem: 0

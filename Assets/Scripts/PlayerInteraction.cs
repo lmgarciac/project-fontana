@@ -49,8 +49,8 @@ public class PlayerInteraction : MonoBehaviour
                 characterController.enabled = false;
                 firstPersonController.CanMoveCamera = false;
 
-                if (interactable.InteractableParameters.pickupDialogue != null &&
-                    interactable.InteractableParameters.pickupDialogue.Count != 0)
+                if (interactable.InteractableParameters?.pickupDialogue != null &&
+                    interactable.InteractableParameters?.pickupDialogue.Count != 0)
                 {
                     if (!playerInteractUI.ShowingDialogue)
                         playerInteractUI.ShowDialogue(interactable.InteractableParameters.interactableDialogue, DialogueFinished, interactable);
@@ -76,8 +76,8 @@ public class PlayerInteraction : MonoBehaviour
                 characterController.enabled = false;
                 firstPersonController.CanMoveCamera = false;
 
-                if (pickable.InteractableParameters.pickupDialogue != null &&
-                    pickable.InteractableParameters.pickupDialogue.Count != 0)
+                if (pickable.InteractableParameters?.pickupDialogue != null &&
+                    pickable.InteractableParameters?.pickupDialogue.Count != 0)
                 {
                     if (!playerInteractUI.ShowingDialogue)
                         playerInteractUI.ShowDialogue(pickable.InteractableParameters.pickupDialogue, PickupDialogueFinished, interactable);
