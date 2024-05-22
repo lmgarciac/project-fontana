@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SunCycle : MonoBehaviour
@@ -5,48 +6,92 @@ public class SunCycle : MonoBehaviour
     [SerializeField] private float dayDuration = 60.0f; // Duration of a full day in seconds
     [SerializeField] private bool disableCycling = false;
 
-    private Light sunLight;
+    [SerializeField] private Color dayColor = Color.white;
+    [SerializeField] private Color sunsetColor = new Color(1.0f, 0.5f, 0.0f);
+    [SerializeField] private Color nightColor = Color.black;
+
+    [SerializeField] private float dayIntensity = 1.0f; // Intensity during the day
+    [SerializeField] private float nightIntensity = 0.2f; // Intensity during the night
+
+    [SerializeField] private float maxYAxisAngle = 30.0f; // Maximum tilt angle on the y-axis
+
+    [SerializeField] private List<Light> lamps; // List of point lights representing lamps
+    [SerializeField] private Light sunLight; // Reference to the sun light
+
     private float currentTime = 0f;
 
     void Start()
     {
-        sunLight = GetComponent<Light>();
+        if (disableCycling)
+            return;
+
         if (sunLight == null)
         {
-            Debug.LogError("SunCycle script must be attached to a GameObject with a Light component.");
+            Debug.LogError("SunCycle script must be assigned a Light component for the sun.");
+        }
+
+        foreach (var lamp in lamps)
+        {
+            if (lamp != null)
+            {
+                lamp.gameObject.SetActive(true);
+            }
         }
     }
 
     void Update()
     {
-        if (disableCycling)
+        if (disableCycling || sunLight == null)
             return;
 
-        // Calculate the current time of day
+        // Update the current time of day
         currentTime += Time.deltaTime;
-        float timePercentage = currentTime / dayDuration;
+        float timePercentage = (currentTime % dayDuration) / dayDuration;
 
-        // Loop the time percentage
-        if (timePercentage >= 1.0f)
+        // Calculate rotation angles
+        float rotationAngleX = timePercentage * 360.0f - 90.0f;
+        float rotationAngleY = Mathf.Sin(timePercentage * Mathf.PI * 2) * maxYAxisAngle;
+
+        // Apply rotation to simulate the sun's movement
+        sunLight.transform.rotation = Quaternion.Euler(new Vector3(rotationAngleX, 170.0f + rotationAngleY, 0.0f));
+
+        // Adjust color and intensity based on rotationAngleX
+        float sunIntensity;
+        if (rotationAngleX >= -90.0f && rotationAngleX < 0.0f) // Sunrise
         {
-            currentTime = 0f;
-            timePercentage = 0f;
+            float t = (rotationAngleX + 90.0f) / 90.0f;
+            sunLight.color = Color.Lerp(nightColor, sunsetColor, t);
+            sunIntensity = Mathf.Lerp(nightIntensity, dayIntensity, t);
+        }
+        else if (rotationAngleX >= 0.0f && rotationAngleX < 90.0f) // Day
+        {
+            float t = rotationAngleX / 90.0f;
+            sunLight.color = Color.Lerp(sunsetColor, dayColor, t);
+            sunIntensity = dayIntensity;
+        }
+        else if (rotationAngleX >= 90.0f && rotationAngleX < 180.0f) // Sunset
+        {
+            float t = (rotationAngleX - 90.0f) / 90.0f;
+            sunLight.color = Color.Lerp(dayColor, sunsetColor, t);
+            sunIntensity = Mathf.Lerp(dayIntensity, nightIntensity, t);
+        }
+        else // Night
+        {
+            float t = (rotationAngleX + 180.0f) / 90.0f;
+            sunLight.color = Color.Lerp(sunsetColor, nightColor, t);
+            sunIntensity = nightIntensity;
         }
 
-        // Rotate the light
-        float rotationAngle = timePercentage * 360.0f;
-        transform.rotation = Quaternion.Euler(new Vector3(rotationAngle - 90.0f, 170.0f, 0.0f));
+        sunLight.intensity = sunIntensity;
 
-        // Change the color
-        if (timePercentage <= 0.5f)
+        // Update lamp intensities based on the inverse of the sun's intensity
+        float lampIntensity = (1.0f - sunIntensity)*5.0f;
+        foreach (var lamp in lamps)
         {
-            // Day to sunset transition
-            sunLight.color = Color.Lerp(Color.white, new Color(1.0f, 0.5f, 0.0f), timePercentage * 2.0f);
-        }
-        else
-        {
-            // Sunset to night transition
-            sunLight.color = Color.Lerp(new Color(1.0f, 0.5f, 0.0f), Color.black, (timePercentage - 0.5f) * 2.0f);
+            if (lamp != null)
+            {
+                lamp.intensity = lampIntensity;
+            }
         }
     }
 }
