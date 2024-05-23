@@ -9,9 +9,8 @@ public class PaintingBehaviour : InteractablePickable
     [SerializeField]
     private int paintingID;
     [SerializeField] 
-    private List<PaintingConditions> paintingConditions;
+    private List<PaintingConditions> paintingConditions; //Only to show it on editor
 
-    private CompletionConditions completionConditions;
     private bool allConditionsMet;
 
     public int PaintingID { get => paintingID; set => paintingID = value; }

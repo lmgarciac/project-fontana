@@ -5040,6 +5040,10 @@ PrefabInstance:
       propertyPath: interactableNameExpected
       value: obj_painting
       objectReference: {fileID: 0}
+    - target: {fileID: 3094896820807371674, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3193757674962298746, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -5060,6 +5064,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1338680357}
+    - target: {fileID: 3344256770288268078, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3511365056041592145, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5192,6 +5200,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7396611416911254491, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7617521002467943254, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -5305,7 +5317,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2268414324369993530, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+    - {fileID: 0}
     - {fileID: 5822595165431817746, guid: 94c611323a865104fb385b6223ba2319, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2484339134338635892, guid: 94c611323a865104fb385b6223ba2319, type: 3}

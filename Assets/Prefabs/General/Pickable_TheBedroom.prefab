@@ -5061,7 +5061,6 @@ GameObject:
   - component: {fileID: 7175383555183759328}
   - component: {fileID: 1027324527603722086}
   - component: {fileID: 6806915075750004484}
-  - component: {fileID: 1738323485167990239}
   m_Layer: 6
   m_Name: Pickable_TheBedroom
   m_TagString: Untagged
@@ -5115,20 +5114,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5145125, y: 0.030000007, z: 0.5145126}
   m_Center: {x: 0, y: 0, z: 0.25000003}
---- !u!114 &1738323485167990239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005383008100694669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2bef2ca616125544aec44144f6fd83e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactablePrompt: Pick "The Bedroom"
-  hasAlternativeMesh: 1
 --- !u!1 &2404778796585478141
 GameObject:
   m_ObjectHideFlags: 0
@@ -5304,6 +5289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lockCameraXTilt: 1
+  _fixed: 0
 --- !u!1 &4504145021943328093
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GlobalManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GlobalManager : MonoBehaviour
 
     [SerializeField] private PlayerInteractUI playerInteractUI;
 
+    public Action<int> FinishRestoration;
     public List<PaintingBehaviour> paintings;
 
     // Public property to access the singleton instance
@@ -97,7 +99,7 @@ public class GlobalManager : MonoBehaviour
 
         if (completedPaintings.ContainsKey(paintingID))
         {
-            completedPaintings[paintingID] = restoredStatus;
+            completedPaintings[paintingID] = restoredStatus; //Theres probably a bug here, we need to fix when the condition is no longer completed
 
             Debug.Log($"Painting {paintingID} status updated!. Status {restoredStatus}");
         }
@@ -110,6 +112,11 @@ public class GlobalManager : MonoBehaviour
             //TODO: Make it work for both notepad sides in the future, depending on which page the painting is on.
             ((NotepadBehavior)GetFromInventory(InteractableType.Notepad)).SetPageComplete(PageSide.RIGHTPAGE, restoredStatus); 
         }
+
+        if (restoredStatus)
+        {
+            TriggerFinishRestoration(paintingID);
+        }
     }
 
     public void PaintingConditionCompletion(int paintingID, string itemPlacedName)
@@ -121,6 +128,11 @@ public class GlobalManager : MonoBehaviour
                 painting.UpdateRestorationCondition(itemPlacedName);
             }
         }
+    }
+
+    public void TriggerFinishRestoration(int paintingID)
+    {
+        FinishRestoration?.Invoke(paintingID);
     }
 
     public void AddToInventory(InteractableType inventoryItem, IInteractable item)
