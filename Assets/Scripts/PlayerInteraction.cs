@@ -49,8 +49,8 @@ public class PlayerInteraction : MonoBehaviour
                 characterController.enabled = false;
                 firstPersonController.CanMoveCamera = false;
 
-                if (interactable.InteractableParameters?.pickupDialogue != null &&
-                    interactable.InteractableParameters?.pickupDialogue.Count != 0)
+                if (interactable.InteractableParameters?.interactableDialogue != null &&
+                    interactable.InteractableParameters?.interactableDialogue.Count != 0)
                 {
                     if (!playerInteractUI.ShowingDialogue)
                         playerInteractUI.ShowDialogue(interactable.InteractableParameters.interactableDialogue, DialogueFinished, interactable);
