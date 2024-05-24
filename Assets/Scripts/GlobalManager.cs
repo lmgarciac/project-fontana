@@ -13,6 +13,10 @@ public class GlobalManager : MonoBehaviour
     private Dictionary<InteractableType, IInteractable> pickedUpItems = new Dictionary<InteractableType, IInteractable>();
 
     [SerializeField] private PlayerInteractUI playerInteractUI;
+    [SerializeField] private GameObject globalSpawnPoint;
+
+    public PlayerInteractUI PlayerInteractUI { get => playerInteractUI; }
+    public GameObject GlobalSpawnPoint { get => globalSpawnPoint; set => globalSpawnPoint = value; }
 
     public Action<int> FinishRestoration;
     public List<PaintingBehaviour> paintings;
@@ -38,8 +42,6 @@ public class GlobalManager : MonoBehaviour
             return _instance;
         }
     }
-
-    public PlayerInteractUI PlayerInteractUI { get => playerInteractUI; }
 
     private void Awake()
     {

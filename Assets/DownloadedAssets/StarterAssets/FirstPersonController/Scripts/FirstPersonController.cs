@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using System;
+using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -64,6 +67,8 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
+		// Events
+
 	
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
@@ -87,11 +92,11 @@ namespace StarterAssets
 		}
 
 
-        private bool canMoveCamera = true;
-        public bool CanMoveCamera { get => canMoveCamera; set => canMoveCamera = value; }
+		private bool canMoveCamera = true;
+		public bool CanMoveCamera { get => canMoveCamera; set => canMoveCamera = value; }
 
 
-        private void Awake()
+		private void Awake()
 		{
 			// get a reference to our main camera
 			if (_mainCamera == null)
@@ -102,6 +107,8 @@ namespace StarterAssets
 
 		private void Start()
 		{
+			GlobalManager.Instance.FinishRestoration += OnFinishRestoration;
+
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM
@@ -269,6 +276,22 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+
+		private void OnFinishRestoration(int paintingID)
+		{
+			StartCoroutine(GoToBed());
+		}
+
+		private IEnumerator GoToBed()
+		{
+			yield return new WaitForSeconds(1); //Sync this wait with the one from the FadeScreen ???
+			gameObject.GetComponentInParent<Transform>().position = GlobalManager.Instance.GlobalSpawnPoint.transform.position;
+		}
+
+		private void OnDestroy()
+		{
+			GlobalManager.Instance.FinishRestoration -= OnFinishRestoration;
 		}
 	}
 }
