@@ -16,6 +16,11 @@ public class NPC_Stranger : InteractableObject
         Debug.LogError("INTERACT STRANGER");
     }
 
+    private void OnDestroy()
+    {
+        GlobalManager.Instance.FinishRestoration -= OnFinishRestoration;
+    }
+
     private void OnFinishRestoration(int paintingID)
     {
         if (paintingID != 1) //First painting, "The Bedroom". Check if we need the whole PaintingBehavior later

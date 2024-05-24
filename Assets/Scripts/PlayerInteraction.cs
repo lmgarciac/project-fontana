@@ -43,7 +43,13 @@ public class PlayerInteraction : MonoBehaviour
         {
             IInteractable interactable = GetInteractableObject();
             objectInHand?.TryGetComponent<IUsable>(out usableObject);
-            
+
+            if (interactable == null)
+            {
+                Debug.Log($"No interactable found on range.");
+                return;
+            }
+
             if (interactable != null && interactable is InteractableObject) 
             {
                 characterController.enabled = false;

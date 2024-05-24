@@ -10,6 +10,8 @@ public class PaintingBehaviour : InteractablePickable
     private int paintingID;
     [SerializeField] 
     private List<PaintingConditions> paintingConditions; //Only to show it on editor
+    [SerializeField]
+    private Texture completedTexture;
 
     private bool allConditionsMet;
 
@@ -19,6 +21,7 @@ public class PaintingBehaviour : InteractablePickable
     {
         base.Start();
         paintingConditions = GlobalManager.Instance.GetPaintingConditions(paintingID); //This gets the painting conditions for the painting duh
+        GlobalManager.Instance.FinishRestoration += OnFinishRestoration;
     }
 
     public void UpdateRestorationCondition(string itemPlacedName) //Rework this later to implement dialogue choices
@@ -45,5 +48,21 @@ public class PaintingBehaviour : InteractablePickable
     {
         //Sets the painting status in global manager
         GlobalManager.Instance.PaintingStatusChange(PaintingID, completionStatus);
+    }
+
+    private void OnDestroy()
+    {
+        GlobalManager.Instance.FinishRestoration -= OnFinishRestoration;
+    }
+
+    private void OnFinishRestoration(int paintingID)
+    {
+        ChangePaintingTexture(completedTexture);
+    }
+
+    private void ChangePaintingTexture(Texture completedTexture) //A painting should always have a portal and non portal child associated with it, this could be improved later on
+    {
+        this.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.mainTexture = completedTexture;
+        this.gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.mainTexture = completedTexture;
     }
 }
