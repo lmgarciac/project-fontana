@@ -4635,6 +4635,18 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1338680357}
+    - target: {fileID: 1931084236462432404, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: interactableType
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2067231429588230248, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073487362871278809, guid: 94c611323a865104fb385b6223ba2319, type: 3}
+      propertyPath: _myCamera
+      value: 
+      objectReference: {fileID: 1836099474}
     - target: {fileID: 2168017504940770359, guid: 94c611323a865104fb385b6223ba2319, type: 3}
       propertyPath: m_Mesh
       value: 

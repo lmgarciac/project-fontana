@@ -19,3 +19,9 @@ MonoBehaviour:
     conditionDescription: Place the jar in the painting
     itemToPlace: obj_jar
     completedCondition: 0
+  - paintingID: 2
+    paintingName: Fontana's "The Tree"
+    conditionType: 0
+    conditionDescription: Make the tree grow
+    itemToPlace: obj_seed
+    completedCondition: 0
