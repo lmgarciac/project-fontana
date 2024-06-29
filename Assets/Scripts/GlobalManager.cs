@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fontana = System.Drawing;
 using UnityEngine.Events;
 
 public class GlobalManager : MonoBehaviour
@@ -12,11 +13,22 @@ public class GlobalManager : MonoBehaviour
     private Dictionary<int, bool> completedPaintings = new Dictionary<int, bool>();
     private Dictionary<InteractableType, IInteractable> pickedUpItems = new Dictionary<InteractableType, IInteractable>();
 
+    private Fontana.Color currentPaletteColor1 = new Fontana.Color();
+    private Fontana.Color currentPaletteColor2 = new Fontana.Color();
+    private Fontana.Color currentPaletteColor3 = new Fontana.Color();
+    private Fontana.Color currentPaletteColorResult = new Fontana.Color();
+
     [SerializeField] private PlayerInteractUI playerInteractUI;
     [SerializeField] private GameObject globalSpawnPoint;
 
     public PlayerInteractUI PlayerInteractUI { get => playerInteractUI; }
     public GameObject GlobalSpawnPoint { get => globalSpawnPoint; set => globalSpawnPoint = value; }
+
+    //This could be better, maybe save it into a different struct
+    public Fontana.Color CurrentPaletteColor1 { get => currentPaletteColor1; set => currentPaletteColor1 = value; }
+    public Fontana.Color CurrentPaletteColor2 { get => currentPaletteColor2; set => currentPaletteColor2 = value; }
+    public Fontana.Color CurrentPaletteColor3 { get => currentPaletteColor3; set => currentPaletteColor3 = value; }
+    public Fontana.Color CurrentPaletteColorResult { get => currentPaletteColorResult; set => currentPaletteColorResult = value; }
 
     public Action<int> FinishRestoration;
     public List<PaintingBehaviour> paintings;
