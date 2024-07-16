@@ -75,3 +75,8 @@ MonoBehaviour:
     interactableDialogue: []
     pickupDialogue: []
     isInventoryItem: 0
+  - interactableIdentifier: 8
+    interactableDescription: Painting The Tree
+    interactableDialogue: []
+    pickupDialogue: []
+    isInventoryItem: 0
