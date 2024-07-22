@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fontana = System.Drawing;
 using UnityEngine.Events;
+using StarterAssets;
 
 public class GlobalManager : MonoBehaviour
 {
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private FirstPersonController firstPersonController;
+
     private static GlobalManager _instance;
     private List<InteractableParameters> _interactionParameters;
     private List<PaintingConditions> _paintingConditions;
@@ -77,6 +81,22 @@ public class GlobalManager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;
+    }
+
+    public void EnableCharacterController(bool enable)
+    {
+        if (characterController == null)
+            return;
+
+        characterController.enabled = enable;
+    }
+
+    public void EnableFirstPersonController(bool enable)
+    {
+        if (firstPersonController == null)
+            return;
+
+        firstPersonController.enabled = enable;
     }
 
     public InteractableParameters GetInteractionParameters(InteractableType interactableType)

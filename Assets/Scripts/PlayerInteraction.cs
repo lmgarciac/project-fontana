@@ -20,9 +20,6 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField]
     private PlayerInteractUI playerInteractUI;
 
-    private CharacterController characterController;
-    private FirstPersonController firstPersonController;
-
     private RaycastHit[] raycastArray;
     private GameObject objectInHand;
     private IUsable usableObject;
@@ -30,12 +27,6 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject ObjectInHand { get => objectInHand;}
 
     public Action OnDialogueFinished;
-
-    private void Awake()
-    {
-        characterController = GetComponent<CharacterController>();
-        firstPersonController = GetComponent<FirstPersonController>();
-    }
 
     private void Update()
     {
@@ -52,8 +43,8 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable != null && interactable is InteractableObject) 
             {
-                characterController.enabled = false;
-                firstPersonController.CanMoveCamera = false;
+                GlobalManager.Instance.EnableCharacterController(false);
+                GlobalManager.Instance.EnableFirstPersonController(false);
 
                 if (interactable.InteractableParameters?.interactableDialogue != null &&
                     interactable.InteractableParameters?.interactableDialogue.Count != 0)
@@ -66,8 +57,8 @@ public class PlayerInteraction : MonoBehaviour
                     return;
                 }
 
-                characterController.enabled = true;
-                firstPersonController.CanMoveCamera = true;
+                GlobalManager.Instance.EnableCharacterController(true);
+                GlobalManager.Instance.EnableFirstPersonController(true);
             }
 
             if (interactable == null || (usableObject != null && usableObject.IsBeingUsed()))
@@ -79,8 +70,8 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable is InteractablePickable pickable && objectInHand == null)
             {
-                characterController.enabled = false;
-                firstPersonController.CanMoveCamera = false;
+                GlobalManager.Instance.EnableCharacterController(false);
+                GlobalManager.Instance.EnableFirstPersonController(false);
 
                 if (pickable.InteractableParameters?.pickupDialogue != null &&
                     pickable.InteractableParameters?.pickupDialogue.Count != 0)
@@ -93,8 +84,8 @@ public class PlayerInteraction : MonoBehaviour
                     return;
                 }
 
-                characterController.enabled = true;
-                firstPersonController.CanMoveCamera = true;
+                GlobalManager.Instance.EnableCharacterController(true);
+                GlobalManager.Instance.EnableFirstPersonController(true);
 
                 objectInHand = pickable.PickUp(playerHand);
 
@@ -189,14 +180,14 @@ public class PlayerInteraction : MonoBehaviour
 
     private void DialogueFinished(IInteractable interactable)
     {
-        characterController.enabled = true;
-        firstPersonController.CanMoveCamera = true;
+        GlobalManager.Instance.EnableCharacterController(true);
+        GlobalManager.Instance.EnableFirstPersonController(true);
     }
 
     private void PickupDialogueFinished(IInteractable interactable)
     {
-        characterController.enabled = true;
-        firstPersonController.CanMoveCamera = true;
+        GlobalManager.Instance.EnableCharacterController(true);
+        GlobalManager.Instance.EnableFirstPersonController(true);
 
         interactable.PickUp(playerHand);
     }
