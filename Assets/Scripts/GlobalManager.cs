@@ -10,6 +10,7 @@ public class GlobalManager : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
     [SerializeField] private FirstPersonController firstPersonController;
+    [SerializeField] private StarterAssetsInputs starterAssetsInput;
 
     private static GlobalManager _instance;
     private List<InteractableParameters> _interactionParameters;
@@ -97,6 +98,16 @@ public class GlobalManager : MonoBehaviour
             return;
 
         firstPersonController.enabled = enable;
+    }
+
+    public void EnableStaticCursor(bool enable)
+    {
+        starterAssetsInput.cursorInputForLook = enable;
+    }
+
+    public void SetCursorLockState(bool newState)
+    {
+        Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
     }
 
     public InteractableParameters GetInteractionParameters(InteractableType interactableType)

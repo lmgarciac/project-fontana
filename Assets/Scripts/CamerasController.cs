@@ -24,6 +24,10 @@ public class CamerasController : MonoBehaviour
 
     void Start()
     {
+        GlobalManager.Instance.EnableCharacterController(true);
+        GlobalManager.Instance.EnableFirstPersonController(true);
+        GlobalManager.Instance.EnableStaticCursor(true);
+        GlobalManager.Instance.SetCursorLockState(true);
         SetCamera(CameraType.Player);
     }
 
@@ -53,11 +57,15 @@ public class CamerasController : MonoBehaviour
                 {
                     GlobalManager.Instance.EnableCharacterController(true);
                     GlobalManager.Instance.EnableFirstPersonController(true);
+                    GlobalManager.Instance.EnableStaticCursor(true);
+                    GlobalManager.Instance.SetCursorLockState(true);
                 }
                 else
                 {
                     GlobalManager.Instance.EnableCharacterController(false);
                     GlobalManager.Instance.EnableFirstPersonController(false);
+                    GlobalManager.Instance.EnableStaticCursor(false);
+                    GlobalManager.Instance.SetCursorLockState(false);
                 }
             }
         }
