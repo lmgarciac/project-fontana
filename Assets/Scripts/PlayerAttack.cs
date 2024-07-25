@@ -18,12 +18,37 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     private Transform playerLineOfSight; //This can go into PlayerInteractions too
 
+    [SerializeField]
+    Animator handsAnimator;
+
     bool attacking = false;
     bool readyToAttack = true;
     int attackCount;
 
+    //public const string IDLE = "Idle"; THESE ARE UNUSED STILL, COULD IMPLEMENT IN ANOTHER SCRIPT
+    //public const string WALK = "Walk";
+    public const string ATTACK1 = "Attack 1";
+    public const string ATTACK2 = "Attack 2";
+
+    string currentAnimationState;
+
+    
     PlayerControls playerControls;
     AudioSource audioSource;
+
+    private void Awake()
+    {
+        playerControls = new PlayerControls();
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    void Update()
+    {
+        if (playerControls.Player.Attack.WasPressedThisFrame())
+        {
+            Attack();
+        }
+    }
 
     public void Attack()
     {
@@ -37,6 +62,17 @@ public class PlayerAttack : MonoBehaviour
 
         audioSource.pitch = Random.Range(0.95f, 1.15f);
         audioSource.PlayOneShot(brushSwing);
+
+        if (attackCount == 0) // Two different types of attack
+        {
+            ChangeAnimationState(ATTACK1);
+            attackCount++;
+        }
+        else
+        {
+            ChangeAnimationState(ATTACK2);
+            attackCount = 0;
+        }
     }
 
     void ResetAttack()
@@ -64,22 +100,12 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void ChangeAnimationState(string newState)
     {
-        playerControls = new PlayerControls();
-    }
+        if (currentAnimationState == newState) return;
 
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    void Update()
-    {
-        if (playerControls.Player.Attack.WasPressedThisFrame())
-        {
-            Attack();
-        }
+        currentAnimationState = newState;
+        handsAnimator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
     }
 
     private void OnEnable()
