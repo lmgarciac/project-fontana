@@ -11,6 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public int attackDamage = 1; // For later combination with colour mixing
     public LayerMask attackLayer;
 
+    public GameObject hitEffect;
     public AudioClip brushSwing;
     public AudioClip hitSound;
 
@@ -48,6 +49,9 @@ public class PlayerAttack : MonoBehaviour
     {
         audioSource.pitch = 1;
         audioSource.PlayOneShot(hitSound);
+
+        GameObject GO = Instantiate(hitEffect, point, Quaternion.identity);
+        Destroy(GO,2f); //Maybe there's a better way to do this without creating objects
 
         Debug.Log("HIT ON TARGET");
     }
