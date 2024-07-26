@@ -96,6 +96,9 @@ public class PlayerAttack : MonoBehaviour
     {
         if(Physics.Raycast(playerLineOfSight.position, playerLineOfSight.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
+            if(hit.transform.TryGetComponent<EnemyTest>(out EnemyTest enemy)){
+                enemy.DamageHealth(15f, EnemyTest.ColorType.Red); //Hardcoded for now, testing
+            }
             HitTarget(hit.point);
         }
     }

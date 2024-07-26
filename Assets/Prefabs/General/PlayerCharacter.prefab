@@ -155,7 +155,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8509199583331274174}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: c82a334cf5a5e47978749c210cee72a7, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: f531e09e2ad2fb440b4eed7605863143, type: 2}
 --- !u!1001 &1473236457834978558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240,6 +240,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5393215578589016655, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420857361349278248, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: cursorLocked
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5420857361349278248, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: cursorInputForLook
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5689436362902662556, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
@@ -382,7 +390,7 @@ MonoBehaviour:
   brushSwing: {fileID: 8300000, guid: cc318e579df00ed49a2470f8a9e6e24a, type: 3}
   hitSound: {fileID: 8300000, guid: cff1c79ec0022b3499a45c9cf63be09b, type: 3}
   playerLineOfSight: {fileID: 9137422768761692244}
-  handsAnimator: {fileID: 0}
+  handsAnimator: {fileID: 6630772852869211362}
 --- !u!82 &6242169497962301166
 AudioSource:
   m_ObjectHideFlags: 0
@@ -549,5 +557,10 @@ PrefabInstance:
 --- !u!4 &785051387140472472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7350313921791718135, guid: a088e4585cd5bf44d932db80e6c340fb, type: 3}
+  m_PrefabInstance: {fileID: 7846571834650627183}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6630772852869211362 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3522275904581347469, guid: a088e4585cd5bf44d932db80e6c340fb, type: 3}
   m_PrefabInstance: {fileID: 7846571834650627183}
   m_PrefabAsset: {fileID: 0}
