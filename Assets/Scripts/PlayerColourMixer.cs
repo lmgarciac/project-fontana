@@ -1,58 +1,58 @@
-using System.Collections;
 using System.Collections.Generic;
-using Fontana = System.Drawing;
-//using UnityEditor.Search;
 using UnityEngine;
+using Utils;
 
 public class PlayerColourMixer : MonoBehaviour
 {
-    public static Queue<Fontana.Color> mainPalette;
+    public static Queue<Color> mainPalette;
 
     void Start()
     {
-        mainPalette = new Queue<Fontana.Color>();
+        mainPalette = new Queue<Color>();
 
         //Adding colors into Queue and into GlobalManager
-        AddColor(Fontana.Color.Red, mainPalette);
-        AddColor(Fontana.Color.Yellow, mainPalette);
-        AddColor(Fontana.Color.Blue, mainPalette);
+        AddColor(Color.red, mainPalette);
+        AddColor(Color.yellow, mainPalette);
+        AddColor(Color.blue, mainPalette);
 
-        GlobalManager.Instance.CurrentPaletteColor1 = Fontana.Color.Red;
-        GlobalManager.Instance.CurrentPaletteColor2 = Fontana.Color.Yellow;
-        GlobalManager.Instance.CurrentPaletteColor3 = Fontana.Color.Blue;
-        GlobalManager.Instance.CurrentPaletteColorResult = Fontana.Color.White;
+        GlobalManager.Instance.CurrentPaletteColor1 = Color.red;
+        GlobalManager.Instance.CurrentPaletteColor2 = Color.yellow;
+        GlobalManager.Instance.CurrentPaletteColor3 = Color.blue;
+        GlobalManager.Instance.CurrentPaletteColorResult = Color.white;
+
+        GlobalManager.Instance.CurrentColorType = ColorType.White;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            AddColor(Fontana.Color.Red, mainPalette);
+            AddColor(Color.red, mainPalette);
             StorePaletteColors(mainPalette);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            AddColor(Fontana.Color.Yellow, mainPalette);
+            AddColor(Color.yellow, mainPalette);
             StorePaletteColors(mainPalette);
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            AddColor(Fontana.Color.Blue, mainPalette);
+            AddColor(Color.blue, mainPalette);
             StorePaletteColors(mainPalette);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Fontana.Color resultColor = DetermineColor(mainPalette);
-
+            Color resultColor = DetermineColor(mainPalette);
+            
             //Rework if needed
             GlobalManager.Instance.CurrentPaletteColorResult = resultColor;
         }
     }
 
-    private void AddColor(Fontana.Color paletteColor, Queue<Fontana.Color> paletteToAdd)
+    private void AddColor(Color paletteColor, Queue<Color> paletteToAdd)
     {
         if (paletteToAdd.Count == 3) //3 is the maximum size
         {
@@ -61,36 +61,64 @@ public class PlayerColourMixer : MonoBehaviour
         paletteToAdd.Enqueue(paletteColor);
     }
 
-    private void StorePaletteColors(Queue<Fontana.Color> paletteToStore)
+    private void StorePaletteColors(Queue<Color> paletteToStore)
     {
-        Fontana.Color[] paletteArray = paletteToStore.ToArray(); //Dont like how I made this, rework later
+        Color[] paletteArray = paletteToStore.ToArray(); //Dont like how I made this, rework later
 
         GlobalManager.Instance.CurrentPaletteColor1 = paletteArray[0];
         GlobalManager.Instance.CurrentPaletteColor2 = paletteArray[1];
         GlobalManager.Instance.CurrentPaletteColor3 = paletteArray[2];
     }
 
-    private Fontana.Color DetermineColor(Queue<Fontana.Color> palette)
+    private Color DetermineColor(Queue<Color> palette)
     {   
         int countR = 0;
         int countY = 0;
         int countB = 0;
 
-        foreach (Fontana.Color color in palette)
+        foreach (Color color in palette)
         {
-            if (color == Fontana.Color.Red) countR++;
-            else if (color == Fontana.Color.Yellow) countY++;
-            else if (color == Fontana.Color.Blue) countB++;
+            if (color == Color.red) countR++;
+            else if (color == Color.yellow) countY++;
+            else if (color == Color.blue) countB++;
         }
 
-        if (countR == 3) return Fontana.Color.Red; //This wont work the first time when there are less than 3 colors in palette
-        if (countY == 3) return Fontana.Color.Yellow;
-        if (countB == 3) return Fontana.Color.Blue;
-        if ((countR == 2 && countY == 1) || (countY == 2 && countR == 1)) return Fontana.Color.DarkOrange;
-        if ((countY == 2 && countB == 1) || (countB == 2 && countY == 1)) return Fontana.Color.Green;
-        if ((countR == 2 && countB == 1) || (countB == 2 && countR == 1)) return Fontana.Color.Indigo;
-        if (countR == 1 && countY == 1 && countB == 1) return Fontana.Color.White;
+        if (countR == 3) //This wont work the first time when there are less than 3 colors in palette
+        {
+            GlobalManager.Instance.CurrentColorType = ColorType.Red;
+            return Color.red;
+        } 
+        else if (countY == 3)
+        {
+            GlobalManager.Instance.CurrentColorType = ColorType.Yellow;
+            return Color.yellow;
+        } 
+        else if (countB == 3)
+        {
+            GlobalManager.Instance.CurrentColorType = ColorType.Blue;
+            return Color.blue;
+        } 
+        else if ((countR == 2 && countY == 1) || (countY == 2 && countR == 1))
+        {
+            GlobalManager.Instance.CurrentColorType = ColorType.Orange;
+            return new Color(1, 0.2f, 0, 1); //Orange
+        }  
+        else if ((countY == 2 && countB == 1) || (countB == 2 && countY == 1))
+        {
+            GlobalManager.Instance.CurrentColorType = ColorType.Green;
+            return Color.green;
+        } 
+        else if ((countR == 2 && countB == 1) || (countB == 2 && countR == 1))
+        {
+            GlobalManager.Instance.CurrentColorType = ColorType.Purple;
+            return new Color(1, 0, 1, 1); //Purple
+        }
+        else if (countR == 1 && countY == 1 && countB == 1)
+        {
+            GlobalManager.Instance.CurrentColorType = ColorType.White;
+            return Color.white;
+        } 
 
-        return Fontana.Color.Black; //Check how else can we make Black
+        return Color.black; //Check how else can we make Black?
     }
 }

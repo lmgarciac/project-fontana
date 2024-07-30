@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Fontana = System.Drawing;
-using UnityEngine.Events;
 using StarterAssets;
+using Utils;
 
 public class GlobalManager : MonoBehaviour
 {
@@ -12,28 +10,30 @@ public class GlobalManager : MonoBehaviour
     [SerializeField] private FirstPersonController firstPersonController;
     [SerializeField] private StarterAssetsInputs starterAssetsInput;
 
+    [SerializeField] private PlayerInteractUI playerInteractUI;
+    [SerializeField] private GameObject globalSpawnPoint;
+
     private static GlobalManager _instance;
     private List<InteractableParameters> _interactionParameters;
     private List<PaintingConditions> _paintingConditions;
     private Dictionary<int, bool> completedPaintings = new Dictionary<int, bool>();
     private Dictionary<InteractableType, IInteractable> pickedUpItems = new Dictionary<InteractableType, IInteractable>();
 
-    private Fontana.Color currentPaletteColor1 = new Fontana.Color();
-    private Fontana.Color currentPaletteColor2 = new Fontana.Color();
-    private Fontana.Color currentPaletteColor3 = new Fontana.Color();
-    private Fontana.Color currentPaletteColorResult = new Fontana.Color();
+    private Color currentPaletteColor1 = new Color();
+    private Color currentPaletteColor2 = new Color();
+    private Color currentPaletteColor3 = new Color();
+    private Color currentPaletteColorResult = new Color();
+    private ColorType currentColorType = new ColorType();
 
-    [SerializeField] private PlayerInteractUI playerInteractUI;
-    [SerializeField] private GameObject globalSpawnPoint;
+    //This could be better
+    public Color CurrentPaletteColor1 { get => currentPaletteColor1; set => currentPaletteColor1 = value; }
+    public Color CurrentPaletteColor2 { get => currentPaletteColor2; set => currentPaletteColor2 = value; }
+    public Color CurrentPaletteColor3 { get => currentPaletteColor3; set => currentPaletteColor3 = value; }
+    public Color CurrentPaletteColorResult { get => currentPaletteColorResult; set => currentPaletteColorResult = value; }
+    public ColorType CurrentColorType { get => currentColorType; set => currentColorType = value; }
 
     public PlayerInteractUI PlayerInteractUI { get => playerInteractUI; }
     public GameObject GlobalSpawnPoint { get => globalSpawnPoint; set => globalSpawnPoint = value; }
-
-    //This could be better, maybe save it into a different struct
-    public Fontana.Color CurrentPaletteColor1 { get => currentPaletteColor1; set => currentPaletteColor1 = value; }
-    public Fontana.Color CurrentPaletteColor2 { get => currentPaletteColor2; set => currentPaletteColor2 = value; }
-    public Fontana.Color CurrentPaletteColor3 { get => currentPaletteColor3; set => currentPaletteColor3 = value; }
-    public Fontana.Color CurrentPaletteColorResult { get => currentPaletteColorResult; set => currentPaletteColorResult = value; }
 
     public Action<int> FinishRestoration;
     public List<PaintingBehaviour> paintings;
@@ -81,7 +81,7 @@ public class GlobalManager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
     }
 
     public void EnableCharacterController(bool enable)

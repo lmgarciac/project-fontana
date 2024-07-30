@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utils;
 
 public class PlayerAttack : MonoBehaviour
 {
     public float attackDistance = 3f;
     public float attackDelay = 0.1f;
     public float attackSpeed = 0.3f;
-    public int attackDamage = 1; // For later combination with colour mixing
+    public float attackDamage = 15f; // For later combination with colour mixing
     public LayerMask attackLayer;
 
     public GameObject hitEffect;
@@ -86,8 +87,9 @@ public class PlayerAttack : MonoBehaviour
         audioSource.pitch = 1;
         audioSource.PlayOneShot(hitSound);
 
-        GameObject GO = Instantiate(hitEffect, point, Quaternion.identity);
-        Destroy(GO,2f); //Maybe there's a better way to do this without creating objects
+        // This is disabled until URP is set on the project
+        //GameObject GO = Instantiate(hitEffect, point, Quaternion.identity);
+        //Destroy(GO,2f); //Maybe there's a better way to do this without creating objects
 
         Debug.Log("HIT ON TARGET");
     }
@@ -97,7 +99,7 @@ public class PlayerAttack : MonoBehaviour
         if(Physics.Raycast(playerLineOfSight.position, playerLineOfSight.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             if(hit.transform.TryGetComponent<EnemyTest>(out EnemyTest enemy)){
-                enemy.DamageHealth(15f, EnemyTest.ColorType.Red); //Hardcoded for now, testing
+                enemy.DamageHealth(attackDamage, GlobalManager.Instance.CurrentColorType); //Hardcoded for now, testing
             }
             HitTarget(hit.point);
         }

@@ -13,6 +13,6 @@ public class GemColoring : MonoBehaviour
 
     void Update() //Maybe take this out of update into an event would be better.
     {
-        gemRenderer.material.SetColor("_Color", new Color(GlobalManager.Instance.CurrentPaletteColorResult.R, GlobalManager.Instance.CurrentPaletteColorResult.G, GlobalManager.Instance.CurrentPaletteColorResult.B));
+        gemRenderer.material.SetColor("_Color", new Color(GlobalManager.Instance.CurrentPaletteColorResult.r, GlobalManager.Instance.CurrentPaletteColorResult.g, GlobalManager.Instance.CurrentPaletteColorResult.b));
     }
 }

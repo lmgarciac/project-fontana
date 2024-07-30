@@ -377,6 +377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 282872762}
   - component: {fileID: 282872761}
+  - component: {fileID: 282872763}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -461,6 +462,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &282872763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282872760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1001 &504065590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -513,6 +537,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5947923270940894163, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: attackDamage
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
       propertyPath: playerInteractUI
       value: 
@@ -529,6 +557,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.5537319
       objectReference: {fileID: 0}
+    - target: {fileID: 8238444493924586005, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_CustomSkybox
+      value: 
+      objectReference: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8509199583331274171, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.098154
@@ -550,6 +582,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+--- !u!114 &504065591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+  m_PrefabInstance: {fileID: 504065590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b956e55c04a18294aa8d4da2394f82a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &573557735 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 8509199583331274172, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
@@ -1329,6 +1372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7792165512486213027, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
+      propertyPath: playerInteraction
+      value: 
+      objectReference: {fileID: 504065591}
     - target: {fileID: 8815529678975455172, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1783,6 +1830,10 @@ PrefabInstance:
     - target: {fileID: 4089773111429595003, guid: 46ac44ab29ae5db44a2e4423a364b261, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412425055454341436, guid: 46ac44ab29ae5db44a2e4423a364b261, type: 3}
+      propertyPath: cameras.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7412425055454341436, guid: 46ac44ab29ae5db44a2e4423a364b261, type: 3}
       propertyPath: cameras.Array.data[0].camera

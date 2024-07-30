@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fontana = System.Drawing;
+using Utils;
 
 public class EnemyTest : MonoBehaviour
 {
@@ -9,18 +10,6 @@ public class EnemyTest : MonoBehaviour
     float health = 100f;
     [SerializeField]
     ColorType enemyColor;
-
-    public enum ColorType
-    {
-        Red,
-        Blue,
-        Yellow,
-        Green,
-        Purple,
-        Orange,
-        White,
-        Black
-    }
 
     public void DamageHealth(float damageReceived, ColorType damageColor)
     {
