@@ -4614,6 +4614,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 1
+  enableRotation: 0
+  normalizedEdgeThreshold: 0.1
+  cameraRotateSpeed: 30
 --- !u!1 &904730932
 GameObject:
   m_ObjectHideFlags: 0
@@ -8305,6 +8308,42 @@ PrefabInstance:
       propertyPath: playerInteractUI
       value: 
       objectReference: {fileID: 1469590559}
+    - target: {fileID: 7919606841584617860, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.0981536
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919606841584617860, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0684824
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919606841584617860, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5537328
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238444493924586005, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_CustomSkybox
+      value: 
+      objectReference: {fileID: 2100000, guid: f531e09e2ad2fb440b4eed7605863143, type: 2}
+    - target: {fileID: 8509199583331274171, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.0981536
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509199583331274171, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0684824
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509199583331274171, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.5537328
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509199583331274171, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509199583331274172, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 511
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
