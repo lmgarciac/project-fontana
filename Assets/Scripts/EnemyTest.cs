@@ -7,9 +7,9 @@ using Utils;
 public class EnemyTest : MonoBehaviour
 {
     [SerializeField]
-    float health = 100f;
+    private float health = 100f;
     [SerializeField]
-    ColorType enemyColor;
+    public ColorType enemyColor;
     [SerializeField]
     private HealthBar healthBar;
 

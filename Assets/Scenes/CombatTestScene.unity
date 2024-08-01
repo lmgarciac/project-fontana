@@ -376,6 +376,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fe5a7c1024eea534cb5edf39168f9327, type: 2}
+    - target: {fileID: 7318912381408549469, guid: fb0c2a761fceccd499b1df9dd63004af, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318912381408549469, guid: fb0c2a761fceccd499b1df9dd63004af, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318912381408549469, guid: fb0c2a761fceccd499b1df9dd63004af, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

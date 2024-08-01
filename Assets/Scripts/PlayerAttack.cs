@@ -97,8 +97,13 @@ public class PlayerAttack : MonoBehaviour
         if(Physics.Raycast(playerLineOfSight.position, playerLineOfSight.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             if(hit.transform.TryGetComponent<EnemyTest>(out EnemyTest enemy)){
-                enemy.DamageHealth(attackDamage, GlobalManager.Instance.CurrentColorType); //Hardcoded for now, testing
+                enemy.DamageHealth(attackDamage, GlobalManager.Instance.CurrentColorType);
             }
+            else if (hit.transform.TryGetComponent<CriticalSpot>(out CriticalSpot critSpot))
+            {
+                critSpot.CritDamage(attackDamage, GlobalManager.Instance.CurrentColorType);
+            }
+
             HitTarget(hit.point);
         }
     }
