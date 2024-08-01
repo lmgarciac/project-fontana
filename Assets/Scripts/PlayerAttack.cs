@@ -90,8 +90,6 @@ public class PlayerAttack : MonoBehaviour
         // This is disabled until URP is set on the project
         //GameObject GO = Instantiate(hitEffect, point, Quaternion.identity);
         //Destroy(GO,2f); //Maybe there's a better way to do this without creating objects
-
-        Debug.Log("HIT ON TARGET");
     }
 
     void AttackRaycast()

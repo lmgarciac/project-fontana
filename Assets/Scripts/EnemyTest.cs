@@ -104,9 +104,5 @@ public class EnemyTest : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else
-        {
-            Debug.Log($"Health Remaining: {health}HP");
-        }
     }
 }
