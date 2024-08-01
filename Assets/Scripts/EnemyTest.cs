@@ -10,6 +10,16 @@ public class EnemyTest : MonoBehaviour
     float health = 100f;
     [SerializeField]
     ColorType enemyColor;
+    [SerializeField]
+    private HealthBar healthBar;
+
+    private float maxHealth;
+
+    private void Start()
+    {
+        maxHealth = health;
+        healthBar.UpdateHealthBar(maxHealth, health);
+    }
 
     public void DamageHealth(float damageReceived, ColorType damageColor)
     {
@@ -88,6 +98,8 @@ public class EnemyTest : MonoBehaviour
 
     void CheckHealth()
     {
+        healthBar.UpdateHealthBar(maxHealth, health);
+
         if(health <= 0)
         {
             Destroy(gameObject);
