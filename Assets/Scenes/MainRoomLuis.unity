@@ -4613,10 +4613,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845a9aeab5841ac4b92058704bb622ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 1
-  enableRotation: 0
-  normalizedEdgeThreshold: 0.1
+  enableAutoMovement: 0
+  autoMovementSpeed: 1
+  edgeThreshold: 0.15
   cameraRotateSpeed: 30
+  zoomSpeed: 15
+  minFov: 30
+  maxFov: 80
 --- !u!1 &904730932
 GameObject:
   m_ObjectHideFlags: 0
