@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SkyController : MonoBehaviour
 {
@@ -58,10 +59,13 @@ public class SkyController : MonoBehaviour
         {
             fov -= zoomSpeed * Time.deltaTime;
         }
-
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             fov += zoomSpeed * Time.deltaTime;
+        }
+        else
+        {
+            fov -= Input.mouseScrollDelta.y * zoomSpeed;
         }
 
         fov = Mathf.Clamp(fov, minFov, maxFov);
