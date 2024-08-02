@@ -20,6 +20,11 @@ public class PlayerInteractUI : MonoBehaviour
     [SerializeField] private GameObject notepadIcon;
     [SerializeField] bool showNotepadIcon = true;
 
+    [Header("Hud Parameters")]
+    [SerializeField] private GameObject paletteHud;
+    [SerializeField] private GameObject paletteInputHelp;
+    [SerializeField] private GameObject cursor;
+
     private bool showingDialogue = false;
     private bool continueDialogue = false;
     private Coroutine dialogueCoroutine;
@@ -55,6 +60,17 @@ public class PlayerInteractUI : MonoBehaviour
     private void HideUI()
     {
         containerGameObject.SetActive(false);
+    }
+
+    public void ShowPaletteHud(bool show)
+    {
+        paletteHud.SetActive(show);
+        paletteInputHelp.SetActive(show);
+    }
+
+    public void ShowCursor(bool show)
+    {
+        cursor.SetActive(show);
     }
 
     public void ShowDialogue(List<string> dialogueList, Action<IInteractable> OnDialogueFinished, IInteractable interactable)

@@ -59,6 +59,9 @@ public class CamerasController : MonoBehaviour
                     GlobalManager.Instance.EnableFirstPersonController(true);
                     GlobalManager.Instance.EnableStaticCursor(true);
                     GlobalManager.Instance.SetCursorLockState(true);
+                    GlobalManager.Instance.PlayerInteractUI.ShowPaletteHud(true);
+                    GlobalManager.Instance.PlayerInteractUI.ShowCursor(true);
+
                 }
                 else
                 {
@@ -66,6 +69,9 @@ public class CamerasController : MonoBehaviour
                     GlobalManager.Instance.EnableFirstPersonController(false);
                     GlobalManager.Instance.EnableStaticCursor(false);
                     GlobalManager.Instance.SetCursorLockState(false);
+                    GlobalManager.Instance.PlayerInteractUI.ShowPaletteHud(false);
+                    GlobalManager.Instance.PlayerInteractUI.ShowCursor(false);
+
                 }
             }
         }

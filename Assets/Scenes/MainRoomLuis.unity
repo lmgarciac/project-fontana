@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &31342446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3266371464776866807, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
+  m_PrefabInstance: {fileID: 1847483335484654524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &56180148
 GameObject:
   m_ObjectHideFlags: 0
@@ -6898,6 +6903,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1612959818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 75261222076358584, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
+  m_PrefabInstance: {fileID: 1847483335484654524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1613911201
 GameObject:
   m_ObjectHideFlags: 0
@@ -7758,6 +7768,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6088102965962170766, guid: 94c611323a865104fb385b6223ba2319, type: 3}
   m_PrefabInstance: {fileID: 1856784473}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1931408830 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8802439689439599250, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
+  m_PrefabInstance: {fileID: 1847483335484654524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1962972916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8042,6 +8057,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7792165512486213027, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 1931408830}
+    - target: {fileID: 7792165512486213027, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
+      propertyPath: paletteHud
+      value: 
+      objectReference: {fileID: 1612959818}
+    - target: {fileID: 7792165512486213027, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
+      propertyPath: paletteInputHelp
+      value: 
+      objectReference: {fileID: 31342446}
     - target: {fileID: 7792165512486213027, guid: fb7f5adf7ddbd854a9c4ac4e9f957989, type: 3}
       propertyPath: playerInteraction
       value: 
