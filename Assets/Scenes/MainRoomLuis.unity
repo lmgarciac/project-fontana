@@ -7834,6 +7834,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1183881320}
   m_SourcePrefab: {fileID: 100100000, guid: 22d6fa6af64847e4fb606d1a0cae6713, type: 3}
+--- !u!114 &1973756661 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7412425055454341436, guid: 46ac44ab29ae5db44a2e4423a364b261, type: 3}
+  m_PrefabInstance: {fileID: 8866932611486295604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c35f0626b71aab4083da2d8df9e0fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2023684049
 GameObject:
   m_ObjectHideFlags: 0
@@ -8599,6 +8610,10 @@ PrefabInstance:
       propertyPath: playerInteractUI
       value: 
       objectReference: {fileID: 1469590559}
+    - target: {fileID: 8273486073662632938, guid: 46ac44ab29ae5db44a2e4423a364b261, type: 3}
+      propertyPath: camerasController
+      value: 
+      objectReference: {fileID: 1973756661}
     - target: {fileID: 8273486073662632938, guid: 46ac44ab29ae5db44a2e4423a364b261, type: 3}
       propertyPath: starterAssetsInput
       value: 

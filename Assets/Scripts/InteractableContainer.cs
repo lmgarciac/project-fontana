@@ -36,6 +36,7 @@ public class InteractableContainer : MonoBehaviour, IInteractable
     public string InteractableNameExpected { get => interactableNameExpected; }
 
     public InteractableParameters InteractableParameters { get => interactableParameters; }
+    public bool ShowDialogue { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     private void Start()
     {

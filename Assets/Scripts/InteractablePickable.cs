@@ -28,6 +28,7 @@ public class InteractablePickable : MonoBehaviour, IInteractable
     public bool HasAlternativeMesh { get => hasAlternativeMesh; }
     public GameObject ContainedGameObject { get => containedGameObject; }
     public InteractableParameters InteractableParameters { get => interactableParameters; }
+    public bool ShowDialogue { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     public virtual void Start()
     {

@@ -47,7 +47,8 @@ public class PlayerInteraction : MonoBehaviour
                 GlobalManager.Instance.EnableFirstPersonController(false);
 
                 if (interactable.InteractableParameters?.interactableDialogue != null &&
-                    interactable.InteractableParameters?.interactableDialogue.Count != 0)
+                    interactable.InteractableParameters?.interactableDialogue.Count != 0 &&
+                    interactable.ShowDialogue)
                 {
                     if (!playerInteractUI.ShowingDialogue)
                         playerInteractUI.ShowDialogue(interactable.InteractableParameters.interactableDialogue, DialogueFinished, interactable);
@@ -182,6 +183,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         GlobalManager.Instance.EnableCharacterController(true);
         GlobalManager.Instance.EnableFirstPersonController(true);
+        interactable.ShowDialogue = false;
     }
 
     private void PickupDialogueFinished(IInteractable interactable)

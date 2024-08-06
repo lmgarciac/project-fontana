@@ -49,6 +49,11 @@ public class SkyController : MonoBehaviour
 
         MoveCamera();
         ApplyZoom();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GlobalManager.Instance.CamerasController.ToggleCamera();
+        }
     }
 
     private void ApplyZoom()

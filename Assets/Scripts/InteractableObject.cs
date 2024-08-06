@@ -8,7 +8,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     [SerializeField] private string interactablePrompt;
     private bool isPickableObject;
     private bool isContainerObject;
-
+    private bool showDialogue = true;
     private GameObject interactableGameObject;
     private GameObject containedGameObject;
 
@@ -20,6 +20,8 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public bool IsContainerObject { get => isContainerObject; }
     public GameObject ContainedGameObject { get => containedGameObject; }
     public InteractableParameters InteractableParameters { get => interactableParameters;}
+
+    public bool ShowDialogue { get => showDialogue; set => showDialogue = value; }
 
     public virtual void Start()
     {

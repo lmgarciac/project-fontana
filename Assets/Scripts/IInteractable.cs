@@ -18,5 +18,6 @@ public interface IInteractable
 
     Transform GetTransform();
     string GetInteractPrompt(string objectInHand = null);
+    bool ShowDialogue { get; set; }
     bool IsInteractionPossible(bool objectInHand);
 }

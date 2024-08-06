@@ -35,14 +35,19 @@ public class CamerasController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            if (currentCamera == CameraType.Player)
-                SetCamera(CameraType.Skybox);
-            else
-                SetCamera(CameraType.Player);
+            ToggleCamera();
         }
     }
 
-    public void SetCamera(CameraType cameraSelected)
+    public void ToggleCamera()
+    {
+        if (currentCamera == CameraType.Player)
+            SetCamera(CameraType.Skybox);
+        else
+            SetCamera(CameraType.Player);
+    }    
+
+    private void SetCamera(CameraType cameraSelected)
     {
         foreach (CameraTypes cam in cameras)
         {

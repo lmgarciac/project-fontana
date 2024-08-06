@@ -11,6 +11,8 @@ public class GlobalManager : MonoBehaviour
     [SerializeField] private StarterAssetsInputs starterAssetsInput;
 
     [SerializeField] private PlayerInteractUI playerInteractUI;
+    [SerializeField] private CamerasController camerasController;
+
     [SerializeField] private GameObject globalSpawnPoint;
 
     private static GlobalManager _instance;
@@ -33,6 +35,7 @@ public class GlobalManager : MonoBehaviour
     public ColorType CurrentColorType { get => currentColorType; set => currentColorType = value; }
 
     public PlayerInteractUI PlayerInteractUI { get => playerInteractUI; }
+    public CamerasController CamerasController { get => camerasController; }
     public GameObject GlobalSpawnPoint { get => globalSpawnPoint; set => globalSpawnPoint = value; }
 
     public Action<int> FinishRestoration;
