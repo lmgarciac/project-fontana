@@ -47,11 +47,18 @@ public class PlayerInteractUI : MonoBehaviour
     private void ShowUI(IInteractable interactable)
     {
         GameObject objectInHand = playerInteraction.ObjectInHand;
-        IUsable usableObject = null;
-        objectInHand?.TryGetComponent<IUsable>(out usableObject);
 
-        if (!interactable.IsInteractionPossible(objectInHand != null) || (usableObject != null && usableObject.IsBeingUsed()))
+        IUsable handUsableObject = null;
+        IUsable thisUsableObject = null;
+
+        objectInHand?.TryGetComponent<IUsable>(out handUsableObject);
+        interactable.InteractableGameObject.TryGetComponent<IUsable>(out thisUsableObject);
+
+        if ((handUsableObject != null && handUsableObject.IsBeingUsed()) || (thisUsableObject != null && thisUsableObject.IsBeingUsed()))
+        {
+            HideUI();
             return;
+        }
 
         containerGameObject.SetActive(true);
         interactableObjectPrompt.text = interactable.GetInteractPrompt(objectInHand?.name);
