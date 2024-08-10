@@ -24,6 +24,7 @@ public class SkyController : MonoBehaviour
 
     private Camera camera;
     private Material skyboxMaterial;
+    private bool enabled;
 
     void Start()
     {
@@ -40,8 +41,18 @@ public class SkyController : MonoBehaviour
         }
     }
 
+    public void EnableSkyView(bool enable)
+    {
+        enabled = enable;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     void Update()
     {
+        if (!enabled)
+            return;
+
         if (enableAutoMovement)
         {
             RotateSkybox();
@@ -49,11 +60,6 @@ public class SkyController : MonoBehaviour
 
         MoveCamera();
         ApplyZoom();
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            GlobalManager.Instance.CamerasController.ToggleCamera();
-        }
     }
 
     private void ApplyZoom()

@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class TelescopeController : InteractableObject, IUsable
 {
+    [SerializeField] SkyController skyController;
+
     private bool isBeingUsed = false;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GlobalManager.Instance.CamerasController.ToggleCamera();
+            skyController.EnableSkyView(false);
+            isBeingUsed = false;
+        }
+    }
 
     public override void Interact()
     {
         base.Interact();
         GlobalManager.Instance.CamerasController.ToggleCamera();
+        skyController.EnableSkyView(true);
 
-        isBeingUsed = !isBeingUsed;
+        isBeingUsed = true;
     }
 
     public bool IsBeingUsed()

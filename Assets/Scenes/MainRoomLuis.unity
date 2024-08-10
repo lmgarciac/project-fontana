@@ -7763,6 +7763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactableType: 1
   interactablePrompt: Look At The Sky
+  skyController: {fileID: 898577328}
 --- !u!1 &1919399031 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6088102965962170766, guid: 94c611323a865104fb385b6223ba2319, type: 3}
