@@ -925,7 +925,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 573557735}
-  projectilePrefab: {fileID: 6653795746554947377, guid: 02d05f890148fca4ca9293e43b031631, type: 3}
+  projectilePrefabs:
+  - {fileID: 8393525640811037270, guid: 77dd883b3346e3d48a96690faf3ad58d, type: 3}
+  - {fileID: 8393525640811037270, guid: eda371bbc2e544e4092fe00d3bcaa083, type: 3}
+  - {fileID: 8393525640811037270, guid: 17171adb9fef6c94193d6ca9ff3334de, type: 3}
+  - {fileID: 8393525640811037270, guid: c5e5e7fe7ac3f164fb6c4c73687328e0, type: 3}
+  - {fileID: 8393525640811037270, guid: d823c2d854e275244a14afa9f5ffcf2f, type: 3}
+  - {fileID: 8393525640811037270, guid: 3d598519280e40644a309b838527493b, type: 3}
+  - {fileID: 6653795746554947377, guid: 02d05f890148fca4ca9293e43b031631, type: 3}
   projectileSpawnPoint: {fileID: 504065592}
 --- !u!114 &1399670208 stripped
 MonoBehaviour:
