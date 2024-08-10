@@ -8,6 +8,7 @@ TagManager:
   - SpawnPoint
   - Portal
   - Projectile
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Utils;
 using UnityEngine;
 
 public class PlayerProjectileAttack : MonoBehaviour
@@ -10,12 +8,6 @@ public class PlayerProjectileAttack : MonoBehaviour
     [SerializeField] private Transform projectileSpawnPoint;
 
     private Vector3 projectileDestination;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -46,6 +38,10 @@ public class PlayerProjectileAttack : MonoBehaviour
     private void InstantiateProjectile(Transform spawnPoint)
     {
         GameObject projectileObj = Instantiate(projectilePrefab, spawnPoint.position, Quaternion.identity);
-        projectileObj.GetComponent<ProjectileLogic>().SetProjectileDestination((projectileDestination - spawnPoint.position).normalized);
+
+        ProjectileLogic projectileSpawned = projectileObj.GetComponent<ProjectileLogic>();
+        projectileSpawned.SetProjectileDestination((projectileDestination - spawnPoint.position).normalized);
+
+        projectileSpawned.ProjectileColor = GlobalManager.Instance.CurrentColorType; //Current mixed color
     }
 }
