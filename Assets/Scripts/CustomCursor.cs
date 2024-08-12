@@ -8,14 +8,23 @@ public class CustomCursor : MonoBehaviour
     [Range(5f, 100f)]
     [SerializeField] private float distanceFromCamera;
 
+    [SerializeField] private bool cursorVisible = false;
+
+
     private Vector2 hotSpot = Vector2.zero;
     private CursorMode cursorMode = CursorMode.Auto;
 
     private void Start()
     {
         distanceFromCamera = 20f;
-        hotSpot = new Vector2(customCursorTexture.width / 2, customCursorTexture.height / 2);
-        Cursor.SetCursor(customCursorTexture, hotSpot, cursorMode);
+        Cursor.visible = cursorVisible;
+
+        if (customCursorTexture != null)
+        {
+            hotSpot = new Vector2(customCursorTexture.width / 2, customCursorTexture.height / 2);
+            Cursor.SetCursor(customCursorTexture, hotSpot, cursorMode);
+        }
+
     }
 
     private void Update()
@@ -29,6 +38,9 @@ public class CustomCursor : MonoBehaviour
 
         // Move the trail object to the mouse position
         transform.position = worldPosition;
+
+        // Rotate the object to face the camera
+        transform.LookAt(targetCamera.transform);
     }
 }
 
