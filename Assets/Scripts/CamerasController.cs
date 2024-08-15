@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+
 
 public enum CameraType
 {
@@ -18,7 +20,9 @@ public struct CameraTypes
 
 public class CamerasController : MonoBehaviour
 {
-    public CameraTypes[] cameras; 
+    public CameraTypes[] cameras;
+    [SerializeField] private TelescopeController telescopeController;
+
     private CameraType currentCamera = 0;
     private CameraType previousCamera = 0;
 
@@ -35,7 +39,8 @@ public class CamerasController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            ToggleCamera();
+            telescopeController.Interact();
+            //ToggleCamera();
         }
     }
 
