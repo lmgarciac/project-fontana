@@ -6,12 +6,18 @@ using Utils;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("Attack Details")]
     public float attackDistance = 3f;
-    public float attackDelay = 0.1f;
+    public float attackDelay = 0.3f;
     public float attackSpeed = 0.3f;
     public float attackDamage = 15f; // For later combination with colour mixing
     public LayerMask attackLayer;
 
+    [Header("Impact Frame Details")]
+    public float impactFrameDelay = 0.2f;
+    public float impactFrameTimeScale = 0.2f;
+
+    [Header("Miscellaneous Details")]
     public GameObject hitEffect;
     public AudioClip brushSwing;
     public AudioClip hitSound;
@@ -22,6 +28,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     Animator handsAnimator;
 
+    float elapsedFrameTime = 0f;
+    bool enemyHit = false;
     bool attacking = false;
     bool readyToAttack = true;
     int attackCount;
@@ -49,6 +57,29 @@ public class PlayerAttack : MonoBehaviour
         {
             Attack();
         }
+
+        CheckImpactFrame();
+    }
+
+    void CheckImpactFrame()
+    {
+        if (enemyHit)
+        {
+            elapsedFrameTime += Time.unscaledDeltaTime;
+            if (elapsedFrameTime >= impactFrameDelay)
+            {
+                Time.timeScale = 1f; // Reset time scale
+                enemyHit = false;
+                elapsedFrameTime = 0f;
+            }
+        }
+        
+    }
+
+    void StartImpactFrame()
+    {
+        enemyHit = true;
+        Time.timeScale = impactFrameTimeScale;
     }
 
     public void Attack()
@@ -97,6 +128,7 @@ public class PlayerAttack : MonoBehaviour
         if(Physics.Raycast(playerLineOfSight.position, playerLineOfSight.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
             if(hit.transform.TryGetComponent<EnemyTest>(out EnemyTest enemy)){
+                StartImpactFrame(); //Check this later
                 enemy.DamageHealth(attackDamage, GlobalManager.Instance.CurrentColorType);
             }
             else if (hit.transform.TryGetComponent<CriticalSpot>(out CriticalSpot critSpot))

@@ -459,8 +459,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5947923270940894163, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: attackDelay
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947923270940894163, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: attackSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947923270940894163, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
       propertyPath: attackDamage
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947923270940894163, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
+      propertyPath: impactFrameTimeScale
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7797668327469031410, guid: b22c26ba7e29462419229fc8eb99848b, type: 3}
       propertyPath: playerInteractUI

@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 3903907684414046638}
   - component: {fileID: 8973136380354902261}
   - component: {fileID: 2769043759534830766}
+  - component: {fileID: 5084404282400177953}
   m_Layer: 6
   m_Name: Notepad
   m_TagString: Untagged
@@ -662,9 +663,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b329d84cfdcea4e9fd0c64ce3b7548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 0
+  interactableName: 
   interactablePrompt: PICKUP NOTEPAD
+  hasAlternativeMesh: 0
   notepad_top: {fileID: 8409921221092457291}
   notepad_bottom: {fileID: 7621382414397640320}
+  checkMarkLeft: {fileID: 0}
+  checkMarkRight: {fileID: 0}
+--- !u!114 &5084404282400177953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3988409070246551386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 1
+  outlineColor: {r: 0, g: 0.5795002, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &4079098480800589570
 GameObject:
   m_ObjectHideFlags: 0
